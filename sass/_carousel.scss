@@ -1,0 +1,56 @@
+
+.carousel {
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
+}
+/* The controls */
+.carousel-control {
+    left: -12px;
+    height: 40px;
+    width: 40px;
+    background: none repeat scroll 0 0 #222222;
+    border: 4px solid #FFFFFF;
+    border-radius: 23px 23px 23px 23px;
+    margin-top: 14px;
+}
+.carousel-control.right {
+    right: -12px;
+}
+/* The indicators */
+.carousel-indicators {
+    right: 50%;
+    top: auto;
+    bottom: -10px;
+    margin-right: -19px;
+}
+/* The colour of the indicators */
+.carousel-indicators li {
+    background: #cecece;
+}
+.carousel-indicators .active {
+background: $dark-red;
+}
+
+.item {
+
+    [class*="col-"] {
+        // a {
+        //     background: -webkit-linear-gradient(to right, $napoli-primary 0%, $napoli-primary 50%, $napoli-primary 50%, $napoli-secondary 50%, $napoli-secondary 100%);
+        //     background: -o-linear-gradient(to right, $napoli-primary 0%, $napoli-primary 50%, $napoli-primary 50%, $napoli-secondary 50%, $napoli-secondary 100%);
+        //     background: linear-gradient(to right, $napoli-primary 0%, $napoli-primary 50%, $napoli-primary 50%, $napoli-secondary 50%, $napoli-secondary 100%);
+        // }
+        a {
+            background: lighten($dark-gray, 20%);
+        }
+    }
+}
+
+@media only screen and (max-width: $small) {
+    a.carousel-control {
+
+        .left, .right {
+            display: none;
+        }
+    }
+}
+

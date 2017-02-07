@@ -1,0 +1,8 @@
+
+build/
+.vscode/
+.sass-cache/
+
+*.bat
+*.map
+*.lip

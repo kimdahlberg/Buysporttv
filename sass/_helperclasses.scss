@@ -1,0 +1,36 @@
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.faded-border {
+    padding: 2rem;
+    border: 1px solid lighten($base-gray, 70%);
+}
+
+.active {
+    border-bottom-color: $dark-red !important;
+    opacity: 1 !important;
+}
+
+.row-space-bottom {
+    margin-bottom: 15px;
+}
+
+.space-around {
+    margin: 10px;
+    padding: -10px;
+}
+
+.btn-special {
+    @include border-radius(0px);
+    background: $base-gray;
+    color: $link-color;
+}
+
+.btn-special:hover {
+    background: $brand-success;
+    color: white;
+}

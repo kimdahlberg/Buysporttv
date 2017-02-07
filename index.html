@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <!--Navigation bar top-->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <!--responsive navbar, becomes hamburger menu at small widths-->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsing-navbar" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-left" id="nav-logo"><img src="./img/logo-buysporttv-nobg.png">BuySportTV</a>   
+
+                </div>
+
+                <div class="collapse navbar-collapse" id="collapsing-navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#">Home<span class="sr-only">current</span></a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#loginModal" >Logga in</a></li>
+                        <li><a class="glyphicon glyphicon-shopping-cart" href="./checkout.html"></a></li>     
+                    </ul>
+                </div>
+            </div>    
+        </nav>
+
+        <!--Modal login box-->
+        <div id="loginModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-signin">
+                            <label for="inputEmail" class="sr-only">Email-adress</label>
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email-adress" required autofocus>
+
+                            <label for="inputPassword" class="sr-only">Lösenord</label>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Lösenord" required>
+
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Logga in</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Jumbotron for large image and slogan-->
+        <div class="jumbotron" id="banner-background">
+            <div class="container">
+                
+            </div>
+        </div>
+
+      
+        <div class="container" >
+            <!--Row for sports icons-->
+            <div class="row" id="row-sports">              
+                <div class="col-md-4 col-xs-4 sport-toggle" id="football" role="button" data-toggle="tab" data-target="#leagues-football">
+                    <img class="center-block img-responsive" src="./img/soccer-ball.png" alt="football" data-target="league-row">
+                </div>
+                <div class="col-md-4 col-xs-4 sport-toggle" id="basketball" role="button" data-toggle="tab" data-target="#leagues-basket">
+                    <img class="center-block img-responsive" src="./img/basketball.png" alt="basket" data-target="league-row">
+                </div>
+                <div class="col-md-4 col-xs-4 sport-toggle" id="hockey" role="button" data-toggle="tab" data-target="#leagues-hockey">
+                    <img class="center-block img-responsive" src="./img/hockey-puck.png" alt="hockey">
+                </div>
+            </div>
+        
+            <!--Row for league names-->
+            <div class="row text-center" id="league-row">
+                <div class="tab-content">
+                    <div class="tab-pane" id="empty-tab">
+                        
+                    </div>
+                    <!--football leagues-->
+                    <div class="tab-pane" id="leagues-football">
+                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="premier-league" data-toggle="tab" data-target="#upcoming-football">
+                            <h2>Premier League</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="serie-a" data-toggle="tab" data-target="#upcoming-games">
+                            <h2>Serie A</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="la-liga" data-toggle="tab" data-target="#upcoming-games">
+                            <h2>La Liga</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="champions-league" data-toggle="tab" data-target="#upcoming-games">
+                            <h2>Champions League</h2>
+                        </div>
+                    </div>
+                    <!--basket leagues-->
+                    <div class="tab-pane" id="leagues-basket">
+                        <div class="col-md-12 col-sm-12 col-xs-12 league-toggle" role="button" data-toggle="tab" data-target="#upcoming-basket">
+                            <h2>NBA</h2>
+                        </div>
+                    </div>
+                    <!--hockey leagues-->
+                    <div class="tab-pane" id="leagues-hockey">
+                        <div class="col-md-12 col-sm-12 col-xs-12 league-toggle" role="button" data-toggle="tab" data-target="#upcoming-hockey">
+                            <h2>NHL</h2>
+                        </div>
+                    </div>            
+                    
+                </div>
+            </div>
+
+            <!--upcoming games-->
+            <div class="row tab" id="upcoming-games">
+                <div class="tab-content">
+                    <div class="tab-pane" id="empty-tab">
+                        
+                    </div>
+
+                    <div class="tab-pane fade" id="upcoming-football">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="row text-center">
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a> 
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>       
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="row text-center">
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>  
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>      
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="row text-center">
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a> 
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>
+                                <a class="col-md-12 col-xs-12" href="#">TeamX - TeamY</a>       
+                            </div>
+                        </div>
+
+                        <div class="row text-center">
+                            <a class="col-md-12" href="matcher.html"><h3>SE MERA</h3></a>
+                        </div>
+                    </div> <!--/tab upcoming-football-->
+
+                    <div class="tab-pane fade" id="upcoming-basket">                      
+                    </div>
+                    <div class="tab-pane fade" id="upcoming-hockey">                     
+                    </div>
+
+                </div> <!-- /tab-content-->        
+            </div>  <!-- </upcoming-games> -->  
+        </div> <!--/container-->
+
+
+        <!--FOOTER <--></-->
+        <footer class="footer2">
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <nav class="col-md-3 col-sm-6 col-xs-12">
+                            <h3>Kategorier</h3>
+                            <ul>
+                                <li>
+                                    <a href="#">Fotboll</a>
+                                </li>
+                                <li>
+                                    <a href="#">Basket</a>
+                                </li>
+                                <li>
+                                    <a href="#">Hockey</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <nav class="col-md-3 col-sm-6 col-xs-12">
+                            <h3>Om oss</h3>
+                            <ul>
+                                <li>
+                                    <a href="#">Företaget</a>
+                                </li>
+                                <li>
+                                    <a href="#">Produkten</a>
+                                </li>
+                                <li>
+                                    <a href="#">Kontakt</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <nav class="col-md-3 col-sm-6 col-xs-12">
+                            <h3>Information</h3>
+                            <ul>
+                                <li>
+                                    <a href="#">Kundservice</a>
+                                </li>
+                                <li>
+                                    <a href="#">Sekretess</a>
+                                </li>
+                                <li>
+                                    <a href="#">Allmänna villkor</a>
+                                </li>
+                                <li>
+                                    <a href="#">Prislista</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <nav class="col-md-3 col-sm-6 col-xs-12 text-center" id="footer-logo">
+                            <img src="./img/logo-buysporttv-nobg.png" alt="">
+                            <span>BuySportTV</span>
+                        </nav>
+
+                    </div> <!--/.row--> 
+                </div> <!--/.container--> 
+            </div> <!--/.footer-->
+            
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="pull-left"> Copyright © BuySportTV. All right reserved.</div> 
+                    </div>
+                </div>
+            </div> <!--/.footer-bottom--> 
+        </footer>
+
+
+        
+        <script src="./node_modules/jquery/dist/jquery.min.js"> </script>
+        <script src="./node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+        <script src="./js/main.js"> </script>
+    </body>
+</html>

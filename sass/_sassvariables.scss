@@ -1,0 +1,32 @@
+// $brand-primary:         darken(#428bca, 6.5%) !default; // #337ab7
+// $brand-success:         #5cb85c !default;
+// $brand-info:            #5bc0de !default;
+// $brand-warning:         #f0ad4e !default;
+// $brand-danger:          #d9534f !default;
+
+$icon-font-path: '../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+
+$base-gray: #222728;
+$midnight-blue: #2c3e50;
+$dark-gray: #333333;
+$dark-red: #c0392b;
+
+$background-color: $base-gray;
+
+$link-color: #dddddd;
+$link-hover-color: lighten($link-color, 10%);
+$link-active-color: light($link-color, 10%);
+
+$navbar-default-link-color: $link-color;
+$navbar-default-link-hover-color: $link-hover-color;
+$navbar-default-link-active-color: $link-active-color;
+$navbar-default-bg: $background-color;
+
+
+
+$bottom-border: $dark-red;
+$column-padding: 30px;
+
+$xSmall: 550px;
+$small: 767px;
+$medium: 991;

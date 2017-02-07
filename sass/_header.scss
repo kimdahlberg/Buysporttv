@@ -1,0 +1,24 @@
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    
+    nav li a {
+        line-height: 150px;
+        height: 150px;
+    }
+}
+
+#collapsing-navbar {
+
+    ul {
+        list-style: none;
+    }
+}
+
+#nav-logo {
+    img {
+        height: $navbar-height;
+    }
+    font-size: 2.2rem;
+    text-decoration: none;
+}
