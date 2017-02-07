@@ -5817,6 +5817,9 @@ button.close {
 .row-space-bottom {
   margin-bottom: 15px; }
 
+.col-space-top div {
+  margin-top: 40px; }
+
 .space-around {
   margin: 10px;
   padding: -10px; }
@@ -5919,70 +5922,62 @@ button.close {
     /* Margin bottom by footer height */
     margin-bottom: 350px; }
 
-  .footer2 {
+  .footer-big {
     position: absolute;
     bottom: 0;
     width: 100%; } }
-.footer2 {
+.footer-big {
   /*FOOTER 2*/ }
-  .footer2 ul, .footer2 ol {
+  .footer-big ul, .footer-big ol {
     padding: 0;
     margin: 0; }
-  .footer2 li {
+  .footer-big li {
     list-style: none; }
-  .footer2 a {
+  .footer-big a {
     color: #DDD; }
-  .footer2 a:hover,
-  .footer2 a:focus,
-  .footer2 a:active {
+  .footer-big a:hover,
+  .footer-big a:focus,
+  .footer-big a:active {
     color: #FFF; }
-  .footer2 .footer {
+  .footer-big .footer {
     background-color: #2E3436;
     padding: 35px 0;
     margin-top: 5em; }
-  .footer2 .footer nav h3 {
+  .footer-big .footer nav h3 {
     font-size: 18px;
     color: #FFF;
     font-weight: bold;
     text-transform: uppercase;
     margin: 0 0 1em 0; }
-  .footer2 .footer nav h3 span {
+  .footer-big .footer nav h3 span {
     font-weight: 300;
     text-transform: capitalize; }
-  .footer2 .footer nav ul li a {
+  .footer-big .footer nav ul li a {
     text-decoration: none;
     display: block;
     padding: 4px 0;
     font-size: 13px; }
-  .footer2 .footer-bottom {
+  .footer-big .footer-bottom {
     background-color: #222728;
     padding: 15px 0;
     color: #DDD;
     font-size: 13px; }
-  .footer2 .footer-bottom ul li {
+  .footer-big .footer-bottom ul li {
     display: inline-block; }
-  .footer2 .footer-bottom ul li a {
-    display: block;
-    padding-left: 8px; }
-  .footer2 .footer-bottom ul li a:after {
-    content: "-";
-    padding-left: 8px; }
-  .footer2 .footer-bottom ul li:last-child a:after {
-    content: ""; }
   @media (max-width: 550px) {
-    .footer2 .footer-bottom .pull-left,
-    .footer2 .footer-bottom .pull-right {
+    .footer-big .footer-bottom .pull-left,
+    .footer-big .footer-bottom .pull-right {
       float: none !important;
       width: 100%;
       padding: 10px;
       text-align: center; } }
   @media (max-width: 767px) {
-    .footer2 .footer {
+    .footer-big .footer {
       text-align: center; } }
   @media (max-width: 991px) {
-    .footer2 .footer ul {
+    .footer-big .footer ul {
       margin-bottom: 30px; } }
-  .footer2 #footer-logo span {
+  .footer-big #footer-logo span {
     color: white;
     font-size: 2.2rem; }
 

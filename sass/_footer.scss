@@ -9,14 +9,14 @@
     margin-bottom: 350px;
     }
 
-    .footer2 {
+    .footer-big {
         position: absolute;
         bottom: 0;
         width: 100%;
     }
 }
 
-.footer2 {
+.footer-big {
     
 
     ul, ol {
@@ -74,20 +74,6 @@
 
     .footer-bottom ul li {
         display: inline-block;
-    }
-
-    .footer-bottom ul li a {
-        display: block;
-        padding-left: 8px;
-    }
-
-    .footer-bottom ul li a:after {
-        content: "-";
-        padding-left: 8px;
-    }
-
-    .footer-bottom ul li:last-child a:after {
-        content: "";
     }
 
     @media (max-width: 550px) {
