@@ -2,7 +2,7 @@
 $host_name = "localhost";
 $database = "projekt4"; 	 // Change your database name
 $username = "root";          // Your database user id 
-$password = "root";          // Your password
+$password = "";          // Your password
 
 //////// Do not Edit below /////////
 try {

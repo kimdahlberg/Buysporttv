@@ -48,31 +48,40 @@
 $('#regButton').click(function (e) { 
     e.preventDefault();
 
-    var registration = {
-        'fname': $('#inputFirstNameRegistration').val(),
-        'lname': $('#inputLastNameRegistration').val(),
-        'password': $('#inputPasswordRegistration').val(),
-        'email': $('#inputEmailRegistration').val()
-    };
+    // var r = {
+    //     'fname': $('#inputFirstNameRegistration').val(),
+    //     'lname': $('#inputLastNameRegistration').val(),
+    //     'fpassword': $('#inputPasswordRegistration').val(),
+    //     'cpassword': $('#inputPasswordRegistration').val(),
+    //     'femail': $('#inputEmailRegistration').val(),
+    //     'cemail': $('#inputEmailRegistration').val()
+    // };
+
+    var r = {};
+    r.fname = $('#inputFirstNameRegistration').val();
+    r.lname = $('#inputLastNameRegistration').val();
+    r.fpassword = $('#inputPasswordRegistration').val();
+    r.cpassword = $('#inputPasswordRegistration').val();
+    r.femail = $('#inputEmailRegistration').val();
+    r.cemail = $('#inputEmailRegistration').val();
     
     
 
-    for (var key in registration) {
-        console.log(registration);
+    for (var key in r) {
+        console.log(r);
     }
     
     $.ajax({
         type: "POST",
         url: "http://localhost/buysporttv/api/signup.php",
-        data: { 
-            fname: 'Super',
-            lname: 'Mario',
-            femail: 'mushroom@wahoo.com',
-            cemail: 'mushroom@wahoo.com',
-            fpassword: 't0adSucks',
-            cpassword: 't0adSucks'},
+        data: JSON.stringify(r),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
         success: function (response) {
-            
+            for (var key in response) {
+                console.log(key);
+                console.log(response);
+            }
         }
     });
 });
