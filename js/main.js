@@ -114,6 +114,28 @@ $(document).ready(function () {
             }
         });
     });
+
+    // GET all products of chosen league and team
+    $('.teamSelect').click(function (e) { 
+        e.preventDefault();
+
+        // TODO: create object from league and team selection
+        // Store last clicked league/team in variables?
+        var d = {
+            team: 'Napoli',
+            league: 'Premier League'
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost/buysporttv/api/product.php",
+            data: d,
+            success: function (response) {
+                var returnedProducts = JSON.parse(response);
+                createProductViewHtml(returnedProducts, 'Napoli')
+            }
+        });
+    });
 });
 
 
