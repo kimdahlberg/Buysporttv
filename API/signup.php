@@ -6,6 +6,7 @@
 
 include_once ("connect.php");
 
+// echo $_POST['submitReg'];
 if (isset($_POST['submitReg'])){
 
 
