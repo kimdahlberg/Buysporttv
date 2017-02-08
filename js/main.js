@@ -37,7 +37,6 @@ function createDummyProduct(id) {
 
 // TODO: html structure of productdetails
 function createProductDetailHtml(productData) {
-    console.log(productData);
     var productDetailBox = '<div class="col-md-3 col-sm-6 col-xs-12 faded-border" role="button">' +
     '<div class="col-xs-12 collapsed" data-toggle="collapse" data-target="#game-details'+productData.id+'">' +
         productData.home + ' - ' + productData.away +
@@ -51,13 +50,12 @@ function createProductDetailHtml(productData) {
     '</div>' +
     '</div>';
     // $('#team-upcoming-games').html(productDetailBox);
-    console.log(productDetailBox);
     return productDetailBox;
 }
 
 // Displays all the products returned from the database
 function createProductViewHtml(productList, team) {
-    var productViewBox = '<div class="row text-center tab-pane collapse fade" id="team-upcoming-games">' +
+    var productViewBox = '<div class="row text-center">' +
         '<h1 class="col-md-12">' + team + '</h1>';
     for (var i = 0; i < productList.length; i++) {
         var pDetails = createProductDetailHtml(productList[i]);
@@ -73,7 +71,6 @@ $(document).ready(function () {
     var productList = [];
     for (var i = 0; i < 20; i++) {
         productList[i] = createDummyProduct(i);
-        console.log(productList[i]);
     };
     createProductViewHtml(productList, 'Napoli');
     
