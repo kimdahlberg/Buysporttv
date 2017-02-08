@@ -1,8 +1,18 @@
-var jsonUpcomingGame = '{ "team1":"Atalanta", "team2":"Napoli", "date":"21/2 19:45" }';
 
-var UpcomingGameObj = JSON.parse(jsonUpcomingGame);
 
-$(document).ready(function() {
 
-    $()
-})
+
+$.ajax({
+    type: "POST",
+    url: "http://localhost/buysporttv/api/signup.php",
+    data: { 
+        fname: 'Super',
+        lname: 'Mario',
+        femail: 'mushroom@wahoo.com',
+        cemail: 'mushroom@wahoo.com',
+        fpassword: 't0adSucks',
+        cpassword: 't0adSucks'},
+    success: function (response) {
+        
+    }
+});

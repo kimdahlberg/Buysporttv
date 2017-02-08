@@ -44,3 +44,35 @@
 //         }
 //     })
 // })
+
+$('#regButton').click(function (e) { 
+    e.preventDefault();
+
+    var registration = {
+        'fname': $('#inputFirstNameRegistration').val(),
+        'lname': $('#inputLastNameRegistration').val(),
+        'password': $('#inputPasswordRegistration').val(),
+        'email': $('#inputEmailRegistration').val()
+    };
+    
+    
+
+    for (var key in registration) {
+        console.log(registration);
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: "http://localhost/buysporttv/api/signup.php",
+        data: { 
+            fname: 'Super',
+            lname: 'Mario',
+            femail: 'mushroom@wahoo.com',
+            cemail: 'mushroom@wahoo.com',
+            fpassword: 't0adSucks',
+            cpassword: 't0adSucks'},
+        success: function (response) {
+            
+        }
+    });
+});

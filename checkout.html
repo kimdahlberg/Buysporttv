@@ -154,13 +154,13 @@
                             <div class="form-group">    
                                 <label for="" class="col-md-3 form-label">Förnamn</label> 
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" id="">
+                                    <input type="text" class="form-control" id="inputFnameRegistration">
                                 </div>
                             </div>
                             <div class="form-group">    
                                 <label for="" class="col-md-3 form-label">Efternamn</label> 
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" id="">
+                                    <input type="text" class="form-control" id="inputLastNameRegistration">
                                 </div>
                             </div>
                             <div class="form-group">    
@@ -184,7 +184,7 @@
                                 </div>                    
                             </div>
                             <div class="panel-body">
-                                <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
+                                <div role="form" id="payment-form">
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="form-group">
@@ -236,7 +236,7 @@
                                             <p class="payment-errors"></p>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         <!-- CREDIT CARD FORM ENDS HERE -->
                     </div>
@@ -244,7 +244,7 @@
                     <div class="col-md-12 checkout-block-margin">
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="btn btn-success btn-lg btn-block" type="button">Genomför köp</button>
+                                <button class="btn btn-success btn-lg btn-block" id="regButton" type="button">Genomför köp</button>
                             </div>
                         </div>
                     </div>
@@ -316,9 +316,10 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="pull-left"> Copyright © BuySportTV. All right reserved.</div> 
-                    </div>
                 </div>
             </div> <!--/.footer-bottom--> 
         </footer>
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>
