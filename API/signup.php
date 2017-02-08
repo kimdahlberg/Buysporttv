@@ -6,7 +6,6 @@
 
 include_once ("connect.php");
 
-// echo $_POST['submitReg'];
 if (isset($_POST['submitReg'])){
 
 
@@ -79,9 +78,9 @@ if (isset($_POST['submitReg'])){
 			echo "Error: " . $e->getMessage();
 		}
 
-		$regSuccess = true;
-		
-		echo (json_encode($regSuccess));
+		$_SESSION['userid'] = $pdo->lastInsertId();
+
+			echo "<p>välkomen till sportTV</p>";
 
 	}
 
@@ -96,3 +95,63 @@ $error_list[5] = "E-postadresserna stämmer inte överens.";
 
 
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>user registration php & MySQL</title>
+</head>
+<body
+
+
+<div class="container">
+  				
+<?php
+
+		$back[0] = '';
+	  	$back[1] = '';
+	  	$back[2] = '';
+	  	$back[3] = '';
+
+
+
+	if (isset($reg_error)){
+ 
+		echo "<p>Något blev fel:<br>\n";
+		echo "<ul>\n";
+  		for ($i = 0; $i < sizeof($reg_error); $i++) {
+    		echo "<li>{$error_list[$reg_error[$i]]}</li>\n";
+  		}
+  		echo "</ul>\n";
+  
+		$back[0] = stripslashes($_POST['fname']);
+	  	$back[1] = stripslashes($_POST['lname']);
+	  	$back[2] = stripslashes($_POST['femail']);
+	  	$back[3] = stripslashes($_POST['cemail']);
+
+
+	}
+?>
+
+
+
+    <h1>Create account</h1>
+    <form class="form" action="signup.php" method="post" role="form">
+      
+      <div class="alert alert-error"></div>
+          <input type="text" placeholder="Förnamn" name="fname" value = "<?php echo $back[0]; ?>" required /> <br>
+          <input type="text" placeholder="Efternamn" name="lname" value = "<?php echo $back[1]; ?>"required /> <br>
+          <input type="email" placeholder="Email" name="femail" value = "<?php echo $back[2]; ?>"required /> <br>
+          <input type="email" placeholder="Bekräfta email" name="cemail" value = "<?php echo $back[3]; ?>"required /> <br>
+          <input type="password" placeholder="Password" name="fpassword" autocomplete="new-password" required /> <br>
+          <input type="password" placeholder="Bekräfta password" name="cpassword" autocomplete="new-password" required /> <br>
+          (Lösenordet måste vara minst 8 tecken och innehålla minst en versal).
+    		 <br><br>
+          <input type="submit" value="Skapa konto" name="submitReg" class="" />
+    </form>
+</div>
+
+
+
+</body>
+</html>
