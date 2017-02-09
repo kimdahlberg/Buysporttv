@@ -1,14 +1,10 @@
 <?php 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
-
 
 include_once ("connect.php");
 
 if (isset($_POST['submitReg'])){
 
-
+	$regmessage = ['0','1'];
  
 	// Tag bort eventuella blanksteg i början eller slutet
 	foreach($_POST as $key => $val){
@@ -25,7 +21,7 @@ if (isset($_POST['submitReg'])){
 
   	// Kolla om emailen är upptaget och kopplat till tidigare registrerad användare. 
   	$STH = $pdo->prepare("SELECT email FROM users WHERE email = :email");
-	$STH->bindParam(":email", $_POST['fmail']);
+	$STH->bindParam(":email", $_POST['femail']);
 
 	try {
 		$STH->execute();
@@ -34,8 +30,10 @@ if (isset($_POST['submitReg'])){
 		echo "Error: " . $e->getMessage();
 	}
 			
-	if ($STH->rowCount() > 0)
+	if ($STH->rowCount() > 0) {
     	$reg_error[] = 1;
+
+	}
 
 	//$epost = $_POST['epost'];
 
@@ -77,11 +75,20 @@ if (isset($_POST['submitReg'])){
 		catch (PDOException $e) {
 			echo "Error: " . $e->getMessage();
 		}
+		$temp = $pdo->lastInsertId();
+		$_SESSION['userid'] = $temp;
 
-		$_SESSION['userid'] = $pdo->lastInsertId();
+		if ($temp > 0 ){
+			echo json_encode($regmessage[1]);
+		}
 
-			echo "<p>välkomen till sportTV</p>";
+		else {
+			echo json_encode($regmessage[0]);
+		}
 
+		}
+		else {
+		echo json_encode($regmessage[0]);
 	}
 
 }
@@ -95,63 +102,3 @@ $error_list[5] = "E-postadresserna stämmer inte överens.";
 
 
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>user registration php & MySQL</title>
-</head>
-<body
-
-
-<div class="container">
-  				
-<?php
-
-		$back[0] = '';
-	  	$back[1] = '';
-	  	$back[2] = '';
-	  	$back[3] = '';
-
-
-
-	if (isset($reg_error)){
- 
-		echo "<p>Något blev fel:<br>\n";
-		echo "<ul>\n";
-  		for ($i = 0; $i < sizeof($reg_error); $i++) {
-    		echo "<li>{$error_list[$reg_error[$i]]}</li>\n";
-  		}
-  		echo "</ul>\n";
-  
-		$back[0] = stripslashes($_POST['fname']);
-	  	$back[1] = stripslashes($_POST['lname']);
-	  	$back[2] = stripslashes($_POST['femail']);
-	  	$back[3] = stripslashes($_POST['cemail']);
-
-
-	}
-?>
-
-
-
-    <h1>Create account</h1>
-    <form class="form" action="signup.php" method="post" role="form">
-      
-      <div class="alert alert-error"></div>
-          <input type="text" placeholder="Förnamn" name="fname" value = "<?php echo $back[0]; ?>" required /> <br>
-          <input type="text" placeholder="Efternamn" name="lname" value = "<?php echo $back[1]; ?>"required /> <br>
-          <input type="email" placeholder="Email" name="femail" value = "<?php echo $back[2]; ?>"required /> <br>
-          <input type="email" placeholder="Bekräfta email" name="cemail" value = "<?php echo $back[3]; ?>"required /> <br>
-          <input type="password" placeholder="Password" name="fpassword" autocomplete="new-password" required /> <br>
-          <input type="password" placeholder="Bekräfta password" name="cpassword" autocomplete="new-password" required /> <br>
-          (Lösenordet måste vara minst 8 tecken och innehålla minst en versal).
-    		 <br><br>
-          <input type="submit" value="Skapa konto" name="submitReg" class="" />
-    </form>
-</div>
-
-
-
-</body>
-</html>

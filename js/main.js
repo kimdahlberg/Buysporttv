@@ -52,8 +52,8 @@ function createCarouselTeam(teamData) {
     +   '</a></div>';
 }
 
-function createCarouselView(teamList) {  
-    
+function createCarouselViewHtml(teamList) {  
+    var carouselView = '';
 }
 
 function createProductDetailHtml(productData) {
@@ -87,17 +87,17 @@ function createProductViewHtml(productList, team) {
 
 $(document).ready(function () {
 
-// --DUMMY CODE--
-    // create carousel view
-    var
+    // // --DUMMY CODE--
+    //     // create carousel view
+    //     var
 
-    // create product view
-    var productList = [];
-    for (var i = 0; i < 20; i++) {
-        productList[i] = createDummyProduct(i);
-    };
-    createProductViewHtml(productList, 'Napoli');
-// --END OF DUMMY SECTION--
+    //     // create product view
+    //     var productList = [];
+    //     for (var i = 0; i < 20; i++) {
+    //         productList[i] = createDummyProduct(i);
+    //     };
+    //     createProductViewHtml(productList, 'Napoli');
+    // // --END OF DUMMY SECTION--
 
     $('.sport-toggle').click(function (e) { 
         e.preventDefault();
@@ -130,11 +130,8 @@ $(document).ready(function () {
             url: "http://localhost/buysporttv/api/signup.php",
             data: r,
             success: function (response) {
-                for (var key in response) {
-                    // TODO: registration success message to user
-                    console.log(key);
-                    console.log(response);
-                }
+                console.log(response);
+                console.log(response[0]);
             }
         });
     });
@@ -159,5 +156,16 @@ $(document).ready(function () {
                 createProductViewHtml(returnedProducts, 'Napoli')
             }
         });
+    });
+
+    // GET all premier league games
+    $.ajax({
+        type: "GET",
+        url: "http://localhost/buysporttv/api/products_premier_league.php",
+        success: function (response) {
+            console.log(response);
+            var returnedProducts = JSON.parse(response);
+            createProductViewHtml(returnedProducts, 'Some Team');
+        }
     });
 });
