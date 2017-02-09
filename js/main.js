@@ -3,7 +3,6 @@ var inactiveColor = 'transparent';
 
 // Add red bottom border to selected element
 function toggleActive(callerElement) {
-    console.log("HEJ");
     if(!$(callerElement).hasClass('active')){
         $(callerElement).siblings('.active').removeClass('active');
     };
@@ -138,5 +137,3 @@ $(document).ready(function () {
         });
     });
 });
-
-

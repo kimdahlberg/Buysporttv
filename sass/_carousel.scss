@@ -34,11 +34,6 @@ background: $dark-red;
 .item {
 
     [class*="col-"] {
-        // a {
-        //     background: -webkit-linear-gradient(to right, $napoli-primary 0%, $napoli-primary 50%, $napoli-primary 50%, $napoli-secondary 50%, $napoli-secondary 100%);
-        //     background: -o-linear-gradient(to right, $napoli-primary 0%, $napoli-primary 50%, $napoli-primary 50%, $napoli-secondary 50%, $napoli-secondary 100%);
-        //     background: linear-gradient(to right, $napoli-primary 0%, $napoli-primary 50%, $napoli-primary 50%, $napoli-secondary 50%, $napoli-secondary 100%);
-        // }
         a {
             background: lighten($dark-gray, 20%);
         }
@@ -48,7 +43,7 @@ background: $dark-red;
 @media only screen and (max-width: $small) {
 
     .carousel {
-        min-height: 500px;
+        min-height: 300px;
     }
     a.carousel-control {
 

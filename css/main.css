@@ -5887,6 +5887,9 @@ button.close {
   background: #666666; }
 
 @media only screen and (max-width: 767px) {
+  .carousel {
+    min-height: 300px; }
+
   a.carousel-control .left, a.carousel-control .right {
     display: none; } }
 .form-button {
@@ -6023,5 +6026,3 @@ button.close {
 @media only screen and (max-width: 767px) {
   h2 {
     font-size: 2.2rem; } }
-
-/*# sourceMappingURL=main.css.map */
