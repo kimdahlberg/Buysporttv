@@ -15,13 +15,14 @@ function createDummyRegistration() {
     var r = {};
     r.fname = 'Super'
     r.lname = 'Mario'
-    r.fpassword = 'superPooP89'
-    r.cpassword = 'superPooP89'
-    r.femail = 'poop@gmail.com'
-    r.cemail = 'poop@gmail.com'
+    r.fpassword = 'turtleTerminator98'
+    r.cpassword = 'turtleTerminator98'
+    r.femail = 'plumber4life@wahoo.com'
+    r.cemail = 'plumber4life@wahoo.com'
     r.submitReg = 1;
     return r;
 }
+
 function createDummyProduct(id) {
     var product = {};
     product.id = id;

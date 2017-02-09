@@ -46,6 +46,10 @@ background: $dark-red;
 }
 
 @media only screen and (max-width: $small) {
+
+    .carousel {
+        min-height: 500px;
+    }
     a.carousel-control {
 
         .left, .right {
