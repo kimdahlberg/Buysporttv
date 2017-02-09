@@ -35,20 +35,40 @@ function createDummyProduct(id) {
     return product;
 }
 
-// TODO: html structure of productdetails
+function createCarouselIndicators(leagueName, numberOfIndicators) {
+    var indicatorHtml =  '<ol class="carousel-indicators">';
+    //  create an indicator for every 'page' in the carousel
+    for (var indicator = 0; indicator < numberOfIndicators; indicator++) {
+        indicatorHtml += '<li data-target="#carousel-'+leagueName+'" data-slide-to="'+indicator+'" class="active"></li>';
+    }
+    indicatorHtml += '</ol>';
+    return indicatorHtml;
+}
+
+function createCarouselTeam(teamData) {
+    var carouselItem = '<div class="col-md-2 col-sm-4 col-xs-6">'
+    +   '<a href="#" class="thumbnail" role="button" data-team="'+teamData.name+'" data-toggle="collapse" data-target="#team-upcoming-games">'
+    +   '<h2>AC Milan</h2>'
+    +   '</a></div>';
+}
+
+function createCarouselView(teamList) {  
+    
+}
+
 function createProductDetailHtml(productData) {
-    var productDetailBox = '<div class="col-md-3 col-sm-6 col-xs-12 faded-border" role="button">' +
-    '<div class="col-xs-12 collapsed" data-toggle="collapse" data-target="#game-details'+productData.id+'">' +
-        productData.home + ' - ' + productData.away +
-    '</div>' +
-    '<div class="col-xs-12 collapse" id="game-details'+productData.id+'">' +
-        '<hr>' +
-        '<p>' + productData.date +'</p>' +
-        '<p>' + productData.starttime + ' - ' + productData.stoptime + '</p>' +
-        '<p>€' + productData.price + '</p>' +
-        '<button class="btn btn-special btn-block" type="button">Köp</button>' +
-    '</div>' +
-    '</div>';
+    var productDetailBox = '<div class="col-md-3 col-sm-6 col-xs-12 faded-border" role="button">' 
+    +   '<div class="col-xs-12 collapsed" data-toggle="collapse" data-target="#game-details'+productData.id+'">' 
+    +       productData.home + ' - ' + productData.away 
+    +   '</div>' 
+    +   '<div class="col-xs-12 collapse" id="game-details'+productData.id+'">' 
+    +       '<hr>' 
+    +       '<p>' + productData.date +'</p>' 
+    +   '<p>' + productData.starttime + ' - ' + productData.stoptime + '</p>' 
+    +   '<p>€' + productData.price + '</p>' 
+    +   '<button class="btn btn-special btn-block" type="button">Köp</button>' 
+    +   '</div>' 
+    +'</div>';
     // $('#team-upcoming-games').html(productDetailBox);
     return productDetailBox;
 }
@@ -63,17 +83,22 @@ function createProductViewHtml(productList, team) {
     }
     productViewBox += '</div>';
     $('#team-upcoming-games').html(productViewBox);
-
 }
 
 $(document).ready(function () {
 
+// --DUMMY CODE--
+    // create carousel view
+    var
+
+    // create product view
     var productList = [];
     for (var i = 0; i < 20; i++) {
         productList[i] = createDummyProduct(i);
     };
     createProductViewHtml(productList, 'Napoli');
-    
+// --END OF DUMMY SECTION--
+
     $('.sport-toggle').click(function (e) { 
         e.preventDefault();
         toggleActive(this);
@@ -83,7 +108,6 @@ $(document).ready(function () {
         e.preventDefault();
         toggleActive(this);
     });
-
 
     // REQUESTS
 
