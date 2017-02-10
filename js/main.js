@@ -76,9 +76,9 @@ function createProductDetailHtml(productData) {
 }
 
 // Displays all the products returned from the database
-function createProductViewHtml(productList, team) {
+function createProductViewHtml(productList, title) {
     var productViewBox = '<div class="row text-center">' +
-        '<h1 class="col-md-12">' + team + '</h1>';
+        '<h1 class="col-md-12">' + title + '</h1>';
     for (var i = 0; i < productList.length; i++) {
         var pDetails = createProductDetailHtml(productList[i]);
         productViewBox += pDetails;
@@ -139,27 +139,30 @@ $(document).ready(function () {
     });
 
     // GET all products of chosen league and team
-    $('.teamSelect').click(function (e) { 
+    $('.league-toggle').click(function (e) { 
         e.preventDefault();
 
         // TODO: create object from league and team selection
         // Store last clicked league/team in variables?
         var d = {
-            team: 'Napoli',
-            league: 'Premier League'
+            league: 'nhl',
+            team: 'carolina hurricanes'
         };
 
         $.ajax({
-            type: "GET",
-            url: "http://localhost/buysporttv/api/product.php",
+            type: "POST",
+            url: "http://localhost/buysporttv/api/products_ALL_match.php",
             data: d,
             success: function (response) {
-                var returnedProducts = JSON.parse(response);
+                // var returnedProducts = JSON.parse(response);
                 console.log(response);
-                createProductViewHtml(returnedProducts, 'Napoli')
+                // createProductViewHtml(returnedProducts, 'Napoli')
             }
         });
     });
+
+    // Click carousel item, get productview
+    $('')
 
     // GET all premier league games
     $.ajax({
