@@ -1,6 +1,9 @@
 var selectedColor = '#c0392b';
 var inactiveColor = 'transparent';
 
+// TODO: Session storage
+
+
 // Add red bottom border to selected element
 function toggleActive(callerElement) {
     if(!$(callerElement).hasClass('active')){
@@ -58,18 +61,17 @@ function createCarouselViewHtml(teamList) {
 
 function createProductDetailHtml(productData) {
     var productDetailBox = '<div class="col-md-3 col-sm-6 col-xs-12 faded-border" role="button">' 
-    +   '<div class="col-xs-12 collapsed" data-toggle="collapse" data-target="#game-details'+productData.id+'">' 
+    +   '<div class="col-xs-12 collapsed" data-toggle="collapse" data-target="#game-details-'+productData.id+'">' 
     +       productData.home + ' - ' + productData.away 
     +   '</div>' 
-    +   '<div class="col-xs-12 collapse" id="game-details'+productData.id+'">' 
+    +   '<div class="col-xs-12 collapse" id="game-details-'+productData.id+'">' 
     +       '<hr>' 
-    +       '<p>' + productData.date +'</p>' 
-    +   '<p>' + productData.starttime + ' - ' + productData.stoptime + '</p>' 
-    +   '<p>€' + productData.price + '</p>' 
+    +       '<p>' + parseDate(productData.startdate) +'</p>' 
+    +   '<p>' + parseTime(productData.startdate) + ' - ' + parseTime(productData.stopdate) + '</p>' 
+    +   '<p>' + productData.price + ':-</p>' 
     +   '<button class="btn btn-special btn-block" type="button">Köp</button>' 
     +   '</div>' 
     +'</div>';
-    // $('#team-upcoming-games').html(productDetailBox);
     return productDetailBox;
 }
 
@@ -153,6 +155,7 @@ $(document).ready(function () {
             data: d,
             success: function (response) {
                 var returnedProducts = JSON.parse(response);
+                console.log(response);
                 createProductViewHtml(returnedProducts, 'Napoli')
             }
         });
@@ -163,7 +166,6 @@ $(document).ready(function () {
         type: "GET",
         url: "http://localhost/buysporttv/api/products_premier_league.php",
         success: function (response) {
-            console.log(response);
             var returnedProducts = JSON.parse(response);
             createProductViewHtml(returnedProducts, 'Some Team');
         }

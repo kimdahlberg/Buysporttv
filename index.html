@@ -69,14 +69,14 @@
         <div class="container" >
             <!--Row for sports icons-->
             <div class="row" id="row-sports">              
-                <div class="col-md-4 col-xs-4 sport-toggle" id="football" role="button" data-toggle="tab" data-target="#leagues-football">
+                <div class="col-md-4 col-xs-4 sport-toggle" id="football" role="button" data-toggle="tab" data-sport="football" data-target="#leagues-football">
                     <img class="center-block img-responsive" src="./img/soccer-ball.png" alt="football" data-target="league-row">
                 </div>
-                <div class="col-md-4 col-xs-4 sport-toggle" id="basketball" role="button" data-toggle="tab" data-target="#leagues-basket">
+                <div class="col-md-4 col-xs-4 sport-toggle" id="basketball" role="button" data-toggle="tab" data-sport="basket" data-target="#leagues-basket">
                     <img class="center-block img-responsive" src="./img/basketball.png" alt="basket" data-target="league-row">
                 </div>
-                <div class="col-md-4 col-xs-4 sport-toggle" id="hockey" role="button" data-toggle="tab" data-target="#leagues-hockey">
-                    <img class="center-block img-responsive" src="./img/hockey-puck.png" alt="hockey">
+                <div class="col-md-4 col-xs-4 sport-toggle" id="hockey" role="button" data-toggle="tab" data-sport="hockey" data-target="#leagues-hockey">
+                    <img class="center-block img-responsive" src="./img/hockey-puck.png" alt="hockey" data-target="league-row">
                 </div>
             </div>
         
@@ -88,16 +88,16 @@
                     </div>
                     <!--football leagues-->
                     <div class="tab-pane" id="leagues-football">
-                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="premier-league" data-toggle="tab" data-target="#upcoming-football">
+                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="premier league" data-toggle="tab" data-target="#upcoming-football">
                             <h2>Premier League</h2>
                         </div>
-                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="serie-a" data-toggle="tab" data-target="#upcoming-games">
+                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="serie a" data-toggle="tab" data-target="#upcoming-games">
                             <h2>Serie A</h2>
                         </div>
-                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="la-liga" data-toggle="tab" data-target="#upcoming-games">
+                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="la liga" data-toggle="tab" data-target="#upcoming-games">
                             <h2>La Liga</h2>
                         </div>
-                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="champions-league" data-toggle="tab" data-target="#upcoming-games">
+                        <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="champions league" data-toggle="tab" data-target="#upcoming-games">
                             <h2>Champions League</h2>
                         </div>
                     </div>
@@ -245,8 +245,10 @@
 
 
         
-        <script src="./node_modules/jquery/dist/jquery.min.js"> </script>
-        <script src="./node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
-        <script src="./js/main.js"> </script>
+        <script src="node_modules/jquery/dist/jquery.min.js"> </script>
+        <script src="node_modules/jquery-dateformat/dist/jquery-dateFormat.min.js"></script>
+        <script src="node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+        <script src="js/util.js"></script>
+        <script src="js/main.js"> </script>
     </body>
 </html>
