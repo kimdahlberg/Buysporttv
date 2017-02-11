@@ -11,27 +11,61 @@ function parseTime(dateObject) {
 /*
     Functions to create html from data received from database
 */
-function createCarouselIndicators(leagueName, numberOfIndicators) {
+
+/**
+ * Create an indicator for every slide in the carousel
+ */
+function createCarouselIndicators(numberOfIndicators) {
     var indicatorHtml =  '<ol class="carousel-indicators">';
-    //  create an indicator for every 'page' in the carousel
     for (var indicator = 0; indicator < numberOfIndicators; indicator++) {
-        indicatorHtml += '<li data-target="#carousel-'+leagueName+'" data-slide-to="'+indicator+'" class="active"></li>';
+        indicatorHtml += '<li data-target="#carousel-teams" data-slide-to="'+indicator+'"></li>';
     }
     indicatorHtml += '</ol>';
     return indicatorHtml;
 }
-
+/**
+ * Create a thumbnail of selected team
+ */
 function createCarouselTeam(teamData) {
-    var carouselItem = '<div class="col-md-2 col-sm-4 col-xs-6">'
+    var carouselTeam = '<div class="col-md-2 col-sm-4 col-xs-6">'
     +   '<a href="#" class="thumbnail" role="button" data-team="'+teamData.name+'" data-toggle="collapse" data-target="#team-upcoming-games">'
     +   '<h2>AC Milan</h2>'
     +   '</a></div>';
+    return carouselTeam;
+}
+/**
+ * Create a carousel filled with the teams of selected league
+ */
+function createCarouselViewHtml(teamList) {
+    var numOfTeams = teamList.length; 
+    var numOfIndicators = Math.ceil(numOfTeams / 6); 
+
+    var carouselView = '<div id="carousel-teams" class="carousel slide">';
+    carouselView += createCarouselIndicators(numOfIndicators);
+
+    // Create an item/slide for every indicator
+    carouselView += '<div class="carousel-inner">';  
+    for (var item = 0; i < numOfIndicators; i++) {      
+        carouselView += '<div class="item active">'
+        +   '<div class="row text-center ">'; 
+
+        // Create up to 6 team thumbnails on slide
+        for (var index = 0 + (6*item) ; index < 6 + (6*item) || index < numOfTeams; index++) {
+            carouselView += createCarouselTeam(teamList[index]);
+        }
+        carouselView += '</div></div>';
+    }
+    carouselView += '</div>'
+    + '<a data-slide="prev" href="#carousel-teams" class="left carousel-control">‹</a>'
+    + '<a data-slide="next" href="#carousel-teams" class="right carousel-control">›</a>'
+    + '</div>';
+
+    return carouselView;
 }
 
-function createCarouselViewHtml(teamList) {  
-    var carouselView = '';
-}
-
+/**
+ * 
+ */
 function createProductDetailHtml(productData) {
     var productDetailBox = '<div class="col-md-3 col-sm-6 col-xs-12 faded-border" role="button">' 
     +   '<div class="col-xs-12 collapsed" data-toggle="collapse" data-target="#game-details-'+productData.id+'">' 
@@ -48,7 +82,9 @@ function createProductDetailHtml(productData) {
     return productDetailBox;
 }
 
-// Displays all the products returned from the database
+/**
+ * Displays all the products returned from the database
+ */
 function createProductViewHtml(productList, title) {
     var productViewBox = '<div class="row text-center">' +
         '<h1 class="col-md-12">' + title + '</h1>';
