@@ -27,9 +27,10 @@ function createCarouselIndicators(numberOfIndicators) {
  * Creates a thumbnail of selected team
  */
 function createCarouselTeam(teamData) {
+    //TODO: when talking with the database, teamData will be an object instead of a string, use accordingly
     var carouselTeam = '<div class="col-md-2 col-sm-4 col-xs-6">'
     +   '<a href="#" class="thumbnail" role="button" data-team="'+teamData+'" data-toggle="collapse" data-target="#team-upcoming-games">'
-    +   '<h2>AC Milan</h2>'
+    +   '<h2>' +teamData+ '</h2>'
     +   '</a></div>';
     return carouselTeam;
 }
@@ -39,19 +40,22 @@ function createCarouselTeam(teamData) {
 function createCarouselViewHtml(teamList) {
     var numOfTeams = teamList.length; 
     var numOfIndicators = Math.ceil(numOfTeams / 6); 
+    console.log(numOfIndicators);
 
     var carouselView = '<div id="carousel-teams" class="carousel slide">';
     carouselView += createCarouselIndicators(numOfIndicators);
 
     // Create an item/slide for every indicator
     carouselView += '<div class="carousel-inner">';  
-    for (var item = 0; item < numOfIndicators; item++) {      
+    for (var i = 0; i < numOfIndicators; i++) {      
         carouselView += '<div class="item active">'
         +   '<div class="row text-center ">'; 
 
         // Create up to 6 team thumbnails on slide
-        for (var index = 0 + (6*item) ; index < 6 + (6*item) || index < numOfTeams; index++) {
-            carouselView += createCarouselTeam(teamList[index]);
+        for (var j = 0 + (6*i) ; j < 6 + (6*i) || j < numOfTeams; j++) {
+            carouselView += createCarouselTeam(
+                teamList[j]);
+            console.log(teamList[j]);
         }
         carouselView += '</div></div>';
     }

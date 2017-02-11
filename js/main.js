@@ -16,11 +16,13 @@ function toggleActive(selectedElement) {
 
 $(document).ready(function () {
 
+    // load teams of preselected league
     if (sessionStorage.getItem('selectedLeague')) {
         var dataLeague = sessionStorage.getItem('selectedLeague');
         var leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
         toggleActive(leagueButton);
-        createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]);
+        $(leagueButton.data('target'))
+        .html(createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]));
     };
 
     $('.sport-toggle').click(function (e) { 
@@ -60,7 +62,7 @@ $(document).ready(function () {
     });
 
     // GET all products of chosen league and team
-    $('.league-toggle').click(function (e) { 
+    $('.team-toggle').click(function (e) { 
         e.preventDefault();
 
         // TODO: create object from league and team selection
@@ -90,15 +92,15 @@ $(document).ready(function () {
     // $('')
 
     // GET all premier league games
-    $.ajax({
-        type: "GET",
-        url: "http://localhost/buysporttv/api/products_premier_league.php",
-        // dataType: 'json',
-        success: function (response) {
-            var returnedProducts = JSON.parse(response);
-            console.log(response);
-            console.log(returnedProducts);
-            createProductViewHtml(returnedProducts, 'Some Team');
-        }
-    });
+    // $.ajax({
+    //     type: "GET",
+    //     url: "http://localhost/buysporttv/api/products_premier_league.php",
+    //     // dataType: 'json',
+    //     success: function (response) {
+    //         var returnedProducts = JSON.parse(response);
+    //         console.log(response);
+    //         console.log(returnedProducts);
+    //         createProductViewHtml(returnedProducts, 'Some Team');
+    //     }
+    // });
 });
