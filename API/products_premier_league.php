@@ -1,5 +1,6 @@
 <?php 
 	include_once ("connect.php");
+	// header('Content-Type: application/json');
   	
   	// SQL Hämtar all football (premier league) med all data. 
   	$STH = $pdo->prepare("SELECT `id`, `type`, `league`, `startdate`, `stopdate`, `home`,`away`, `price` FROM products WHERE `league` = 'premier league' ORDER BY `startdate` ASC");

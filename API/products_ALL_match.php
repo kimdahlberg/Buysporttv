@@ -1,6 +1,7 @@
 
 <?php 
 	include_once ("connect.php");
+	header('Content-Type: application/json');
   	
 
 	$league = $_POST['league'];

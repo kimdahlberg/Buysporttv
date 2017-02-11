@@ -1,7 +1,9 @@
 var selectedColor = '#c0392b';
 var inactiveColor = 'transparent';
 
-// TODO: Session storage
+sessionStorage.setItem('selectedSport', 'football');
+sessionStorage.setItem('selectedLeague', 'premier league');
+sessionStorage.setItem('selectedTeam', 'napoli');
 
 
 // Add red bottom border to selected element
@@ -38,68 +40,7 @@ function createDummyProduct(id) {
     return product;
 }
 
-function createCarouselIndicators(leagueName, numberOfIndicators) {
-    var indicatorHtml =  '<ol class="carousel-indicators">';
-    //  create an indicator for every 'page' in the carousel
-    for (var indicator = 0; indicator < numberOfIndicators; indicator++) {
-        indicatorHtml += '<li data-target="#carousel-'+leagueName+'" data-slide-to="'+indicator+'" class="active"></li>';
-    }
-    indicatorHtml += '</ol>';
-    return indicatorHtml;
-}
-
-function createCarouselTeam(teamData) {
-    var carouselItem = '<div class="col-md-2 col-sm-4 col-xs-6">'
-    +   '<a href="#" class="thumbnail" role="button" data-team="'+teamData.name+'" data-toggle="collapse" data-target="#team-upcoming-games">'
-    +   '<h2>AC Milan</h2>'
-    +   '</a></div>';
-}
-
-function createCarouselViewHtml(teamList) {  
-    var carouselView = '';
-}
-
-function createProductDetailHtml(productData) {
-    var productDetailBox = '<div class="col-md-3 col-sm-6 col-xs-12 faded-border" role="button">' 
-    +   '<div class="col-xs-12 collapsed" data-toggle="collapse" data-target="#game-details-'+productData.id+'">' 
-    +       productData.home + ' - ' + productData.away 
-    +   '</div>' 
-    +   '<div class="col-xs-12 collapse" id="game-details-'+productData.id+'">' 
-    +       '<hr>' 
-    +       '<p>' + parseDate(productData.startdate) +'</p>' 
-    +   '<p>' + parseTime(productData.startdate) + ' - ' + parseTime(productData.stopdate) + '</p>' 
-    +   '<p>' + productData.price + ':-</p>' 
-    +   '<button class="btn btn-special btn-block" type="button">Köp</button>' 
-    +   '</div>' 
-    +'</div>';
-    return productDetailBox;
-}
-
-// Displays all the products returned from the database
-function createProductViewHtml(productList, title) {
-    var productViewBox = '<div class="row text-center">' +
-        '<h1 class="col-md-12">' + title + '</h1>';
-    for (var i = 0; i < productList.length; i++) {
-        var pDetails = createProductDetailHtml(productList[i]);
-        productViewBox += pDetails;
-    }
-    productViewBox += '</div>';
-    $('#team-upcoming-games').html(productViewBox);
-}
-
 $(document).ready(function () {
-
-    // // --DUMMY CODE--
-    //     // create carousel view
-    //     var
-
-    //     // create product view
-    //     var productList = [];
-    //     for (var i = 0; i < 20; i++) {
-    //         productList[i] = createDummyProduct(i);
-    //     };
-    //     createProductViewHtml(productList, 'Napoli');
-    // // --END OF DUMMY SECTION--
 
     $('.sport-toggle').click(function (e) { 
         e.preventDefault();
@@ -133,7 +74,6 @@ $(document).ready(function () {
             data: r,
             success: function (response) {
                 console.log(response);
-                console.log(response[0]);
             }
         });
     });
@@ -153,23 +93,30 @@ $(document).ready(function () {
             type: "POST",
             url: "http://localhost/buysporttv/api/products_ALL_match.php",
             data: d,
+            dataType: 'json',
             success: function (response) {
-                // var returnedProducts = JSON.parse(response);
+                var returnedProducts = JSON.parse(response);
                 console.log(response);
-                // createProductViewHtml(returnedProducts, 'Napoli')
+                createProductViewHtml(returnedProducts, sessionStorage.getItem('selectedLeague'));
+            },
+            error: function() {
+                console.log("Request failed");
             }
         });
     });
 
     // Click carousel item, get productview
-    $('')
+    // $('')
 
     // GET all premier league games
     $.ajax({
         type: "GET",
         url: "http://localhost/buysporttv/api/products_premier_league.php",
+        // dataType: 'json',
         success: function (response) {
             var returnedProducts = JSON.parse(response);
+            console.log(response);
+            console.log(returnedProducts);
             createProductViewHtml(returnedProducts, 'Some Team');
         }
     });
