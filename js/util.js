@@ -13,7 +13,7 @@ function parseTime(dateObject) {
 */
 
 /**
- * Create an indicator for every slide in the carousel
+ * Creates an indicator for every slide in the carousel
  */
 function createCarouselIndicators(numberOfIndicators) {
     var indicatorHtml =  '<ol class="carousel-indicators">';
@@ -24,17 +24,17 @@ function createCarouselIndicators(numberOfIndicators) {
     return indicatorHtml;
 }
 /**
- * Create a thumbnail of selected team
+ * Creates a thumbnail of selected team
  */
 function createCarouselTeam(teamData) {
     var carouselTeam = '<div class="col-md-2 col-sm-4 col-xs-6">'
-    +   '<a href="#" class="thumbnail" role="button" data-team="'+teamData.name+'" data-toggle="collapse" data-target="#team-upcoming-games">'
+    +   '<a href="#" class="thumbnail" role="button" data-team="'+teamData+'" data-toggle="collapse" data-target="#team-upcoming-games">'
     +   '<h2>AC Milan</h2>'
     +   '</a></div>';
     return carouselTeam;
 }
 /**
- * Create a carousel filled with the teams of selected league
+ * Creates a carousel filled with the teams of selected league
  */
 function createCarouselViewHtml(teamList) {
     var numOfTeams = teamList.length; 
@@ -45,7 +45,7 @@ function createCarouselViewHtml(teamList) {
 
     // Create an item/slide for every indicator
     carouselView += '<div class="carousel-inner">';  
-    for (var item = 0; i < numOfIndicators; i++) {      
+    for (var item = 0; item < numOfIndicators; item++) {      
         carouselView += '<div class="item active">'
         +   '<div class="row text-center ">'; 
 
@@ -59,12 +59,11 @@ function createCarouselViewHtml(teamList) {
     + '<a data-slide="prev" href="#carousel-teams" class="left carousel-control">‹</a>'
     + '<a data-slide="next" href="#carousel-teams" class="right carousel-control">›</a>'
     + '</div>';
-
     return carouselView;
 }
 
 /**
- * 
+ * Creates a collapsible tab of match information
  */
 function createProductDetailHtml(productData) {
     var productDetailBox = '<div class="col-md-3 col-sm-6 col-xs-12 faded-border" role="button">' 
@@ -74,9 +73,9 @@ function createProductDetailHtml(productData) {
     +   '<div class="col-xs-12 collapse" id="game-details-'+productData.id+'">' 
     +       '<hr>' 
     +       '<p>' + parseDate(productData.startdate) +'</p>' 
-    +   '<p>' + parseTime(productData.startdate) + ' - ' + parseTime(productData.stopdate) + '</p>' 
-    +   '<p>' + productData.price + ':-</p>' 
-    +   '<button class="btn btn-special btn-block" type="button">Köp</button>' 
+    +       '<p>' + parseTime(productData.startdate) + ' - ' + parseTime(productData.stopdate) + '</p>' 
+    +       '<p>' + productData.price + ':-</p>' 
+    +       '<button class="btn btn-special btn-block" type="button">Köp</button>' 
     +   '</div>' 
     +'</div>';
     return productDetailBox;

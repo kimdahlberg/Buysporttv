@@ -2,45 +2,26 @@ var selectedColor = '#c0392b';
 var inactiveColor = 'transparent';
 
 sessionStorage.setItem('selectedSport', 'football');
-sessionStorage.setItem('selectedLeague', 'premier league');
+sessionStorage.setItem('selectedLeague', 'serie a');
 sessionStorage.setItem('selectedTeam', 'napoli');
 
 
 // Add red bottom border to selected element
-function toggleActive(callerElement) {
-    if(!$(callerElement).hasClass('active')){
-        $(callerElement).siblings('.active').removeClass('active');
+function toggleActive(selectedElement) {
+    if(!$(selectedElement).hasClass('active')){
+        $(selectedElement).siblings('.active').removeClass('active');
     };
-    $(callerElement).addClass('active');
-}
-
-// return test object
-function createDummyRegistration() {
-    var r = {};
-    r.fname = 'Super'
-    r.lname = 'Mario'
-    r.fpassword = 'turtleTerminator98'
-    r.cpassword = 'turtleTerminator98'
-    r.femail = 'plumber4life@wahoo.com'
-    r.cemail = 'plumber4life@wahoo.com'
-    r.submitReg = 1;
-    return r;
-}
-
-function createDummyProduct(id) {
-    var product = {};
-    product.id = id;
-    product.type = 'Football'
-    product.home = 'Napoli';
-    product.away = 'Bologna';
-    product.date = '2017-04-04';
-    product.starttime = '18:30';
-    product.stoptime = '20:00';
-    product.price = 20;
-    return product;
+    $(selectedElement).addClass('active');
 }
 
 $(document).ready(function () {
+
+    if (sessionStorage.getItem('selectedLeague')) {
+        var dataLeague = sessionStorage.getItem('selectedLeague');
+        var leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
+        toggleActive(leagueButton);
+        createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]);
+    };
 
     $('.sport-toggle').click(function (e) { 
         e.preventDefault();

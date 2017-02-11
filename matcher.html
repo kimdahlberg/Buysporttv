@@ -62,80 +62,25 @@
         <div class="container-fluid">
             <!--League selector row-->
             <div class="row text-center" id="league-row">
-                <div class="col-md-3 col-sm-3 col-xs-3 league-toggle active" role="button" data-toggle="tab" data-target="carousel-teams">
+                <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="premier league" data-toggle="tab" data-target="carousel-col">
                     <h2>Premier League</h2>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-toggle="tab" data-target="carousel-teams" >
+                <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="serie a" data-toggle="tab" data-target="carousel-col" >
                     <h2>Serie A</h2>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-toggle="tab" data-target="carousel-teams">
+                <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="la liga" data-toggle="tab" data-target="carousel-col">
                     <h2>La Liga</h2>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-toggle="tab" data-target="carousel-teams">
+                <div class="col-md-3 col-sm-3 col-xs-3 league-toggle" role="button" data-league="champins league" data-toggle="tab" data-target="carousel-col">
                     <h2>Champions League</h2>
                 </div>
             </div>
 
             <div class="row tab-pane" id="carousel-row">
                 <div class="col-md-12" id="carousel-col">
-                    <div id="carousel-teams" class="carousel slide">
-                        
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-teams" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-teams" data-slide-to="1"></li>
-                            <li data-target="#carousel-teams" data-slide-to="2"></li>
-                            <li data-target="#carousel-teams" data-slide-to="3"></li>
-                        </ol>
-                        
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">
-                            
-                            <div class="item active">
-                                <div class="row text-center ">
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>AC Milan</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Atalanta</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Bologna</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Cagilari</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Chievo</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Crotone</h2></a></div>
-                                </div><!--.row-->
-                            </div><!--.item-->
-                            
-                            <div class="item">
-                                <div class="row text-center">
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Empoli</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Fiorentina</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Genoa</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Inter Milan</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Juventus</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Lazio</h2></a></div>
-                                </div><!--.row-->
-                            </div><!--.item-->
-                            
-                            <div class="item">
-                                <div class="row text-center">
-                                    <div class="col-md-2 col-sm-4 col-xs-6 collapsed"><a class="thumbnail" role="button" data-team="napoli" data-toggle="collapse" data-target="#team-upcoming-games"><h2>Napoli</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Palermo</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Pescara</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Roma</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Sampdoria</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Sassuolo</h2></a></div>
-                                </div><!--.row-->
-                            </div><!--.item-->
-
-                            <div class="item">
-                                <div class="row text-center">
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Torino</h2></a></div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6"><a href="#" class="thumbnail"><h2>Udinese</h2></a></div>
-                                </div><!--.row-->
-                            </div><!--.item-->
-                        
-                        </div><!--.carousel-inner-->
-                        <a data-slide="prev" href="#carousel-teams" class="left carousel-control">‹</a>
-                        <a data-slide="next" href="#carousel-teams" class="right carousel-control">›</a>
-                    </div><!--.Carousel-->
+                    
                 </div>
-            </div> <!--carousel-row-->
+            </div>
 		</div> <!--container-fluid-->
 
         <!--Teams upcoming games section-->
@@ -220,6 +165,7 @@
         <script src="node_modules/jquery/dist/jquery.min.js"> </script>
         <script src="node_modules/jquery-dateformat/dist/jquery-dateFormat.min.js"></script>
         <script src="node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+        <script src="js/leagueteams.js"></script>
         <script src="js/util.js"></script>
         <script src="js/main.js"> </script>
     </body>
