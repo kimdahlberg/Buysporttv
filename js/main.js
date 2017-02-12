@@ -40,8 +40,6 @@ $(document).ready(function () {
         e.preventDefault();
         toggleActive(this);
         sessionStorage.setItem('selectedLeague', $(this).data('league'));
-        console.log($(this).data('league'));
-        console.log($(this).data('target'));
         $($(this).data('target'))
             .html(createCarouselViewHtml(LEAGUE_TEAMS[$(this).data('league')]));
     });
@@ -93,12 +91,12 @@ $(document).ready(function () {
         // store selected team for future use
         let team = $(this).data('team');
         sessionStorage.setItem('selectedTeam', team);
-
-        let d = {
+        console.log('Toggling team! \nStored team: ' + sessionStorage.getItem('selectedTeam')
+        +   '\nSelected team: ' + team);
+        var d = {
             league: sessionStorage.getItem('selectedLeague'),
             team: team
         };
-        console.log(d);
 
         $.ajax({
             type: "POST",
@@ -108,9 +106,8 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response.length);
                 if (response.length > 0) {
-                    var returnedProducts = JSON.parse(response);
                     $('#team-upcoming-games')
-                    .html(createProductViewHtml(returnedProducts, returnedProducts[0].league));
+                    .html(createProductViewHtml(response, response[0].league));
                 }
                 else {
                     $('#team-upcoming-games').html(createNoMatchesView('Inga matcher hittades'));

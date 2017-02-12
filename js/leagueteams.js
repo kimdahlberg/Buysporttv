@@ -2,7 +2,7 @@
 
 const LEAGUE_TEAMS = {
 
-    'la liga' : [
+    'serie a' : [
         'AC Milan',
         'Atalanta',
         'Bologna',
@@ -48,7 +48,7 @@ const LEAGUE_TEAMS = {
         'West Ham United'
     ],
 
-    'serie a' : [
+    'la liga' : [
         'Alaves',
         'Athletic Bilbao',
         'Atletico Madrid',
