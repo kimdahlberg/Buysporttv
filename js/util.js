@@ -93,17 +93,17 @@ function createCarouselViewHtml(teamList) {
 /**
  * Creates a collapsible tab of match information
  */
-function createProductDetailHtml(productData) {
+function createProductDetailHtml(product) {
     var productDetailBox = '<div class="col-md-3 col-sm-6 col-xs-12 faded-border" role="button">' 
-    +   '<div class="col-xs-12 collapsed" data-toggle="collapse" data-target="#game-details-'+productData.id+'">' 
-    +       productData.home + ' - ' + productData.away 
+    +   '<div class="col-xs-12 collapsed" data-toggle="collapse" data-target="#game-details-'+product.id+'">' 
+    +       product.home + ' - ' + product.away 
     +   '</div>' 
-    +   '<div class="col-xs-12 collapse" id="game-details-'+productData.id+'">' 
+    +   '<div class="col-xs-12 collapse" id="game-details-'+product.id+'">' 
     +       '<hr>' 
-    +       '<p>' + parseDate(productData.startdate) +'</p>' 
-    +       '<p>' + parseTime(productData.startdate) + ' - ' + parseTime(productData.stopdate) + '</p>' 
-    +       '<p>' + productData.price + ':-</p>' 
-    +       '<button class="btn btn-buy btn-block" type="button" data-product-id="'+productData.id+'">Köp</button>' 
+    +       '<p>' + parseDate(product.startdate) +'</p>' 
+    +       '<p>' + parseTime(product.startdate) + ' - ' + parseTime(product.stopdate) + '</p>' 
+    +       '<p>' + product.price + ':-</p>' 
+    +       '<button class="btn btn-buy btn-block" type="button" data-product-id="'+product.id+'">Köp</button>' 
     +   '</div>' 
     +'</div>';
     return productDetailBox;
@@ -121,5 +121,32 @@ function createProductViewHtml(productList, title) {
     }
     productViewRow += '</div>';
     return productViewRow;
+}
+
+/**
+ * Creates table data for one product
+ */
+function createCheckoutProductHtml(product) {
+    let html = 
+        '<tr>'
+    +       '<td data-th="Product">'
+    +           '<div class="row">'
+    +               '<div class="col-sm-2 hidden-xs">'
+    +                   '<img src="http://placehold.it/100x100" alt="..." class="img-responsive"/>'
+    +               '</div>'
+    +               '<div class="col-sm-10">'
+    +                   '<h4 class="nomargin">Atalanta - Napoli</h4>'
+    +                   '<p>'   + parseDate(product.startdate) + '   ' 
+                                + parseTime(product.startdate) + ' - ' 
+                                + parseTime(product.stopdate) 
+    +                   '</p>'
+    +               '</div>'
+    +           '</div>'
+    +       '</td>'
+    +       '<td data-th="Price">' + product.price + ' :-' + '</td>'
+    +       '<td class="actions text-right" data-th="">'
+    +           '<button class="btn btn-danger btn-sm btn-delete"><i class="glyphicon glyphicon-trash"></i></button>'
+    +       '</td>'
+    +   '</tr>';
 }
 

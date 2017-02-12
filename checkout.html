@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>kundvagn</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/main.css" rel="stylesheet">
@@ -36,20 +36,19 @@
         <!--Modal login box-->
         <div id="loginModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
-                
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <form class="form-signin">
-                            <label for="inputEmail" class="sr-only">Email-adress</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email-adress" required autofocus>
+                            <label for="inputUsernameModal" class="sr-only">Användarnamn</label>
+                            <input type="text" id="inputUsernameModal" class="form-control" placeholder="Användarnamn" required autofocus>
 
-                            <label for="inputPassword" class="sr-only">Lösenord</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Lösenord" required>
+                            <label for="inputPasswordModal" class="sr-only">Lösenord</label>
+                            <input type="password" id="inputPasswordModal" class="form-control" placeholder="Lösenord" required>
 
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Logga in</button>
+                            <button class="btn btn-lg btn-primary btn-block btn-login" type="submit">Logga in</button>
                         </form>
                     </div>
                     <div class="modal-footer">
