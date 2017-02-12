@@ -23,11 +23,11 @@ $(document).ready(function () {
         toggleActive(leagueButton);
         // Create carouselview in div that leagueButton targets
         $(leagueButton.data('target'))
-        .html(createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]));
-        // Set active item from team value in sessionStorage
-        var itemToActivate = $('.thumbnail[data-team="'+sessionStorage.getItem('selectedTeam')+'"]')
-        .parents('.item');
-        $('#carousel-teams').carousel(itemToActivate.data('indicator'));
+            .html(createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]));
+        // // Set active item from team value in sessionStorage
+        // var itemToActivate = $('.thumbnail[data-team="'+sessionStorage.getItem('selectedTeam')+'"]')
+        // .parents('.item');
+        // $('#carousel-teams').carousel(itemToActivate.data('indicator'));
     }
 
     $('.sport-toggle').click(function (e) { 
@@ -40,6 +40,25 @@ $(document).ready(function () {
         e.preventDefault();
         toggleActive(this);
         sessionStorage.setItem('selectedLeague', $(this).data('league'));
+        console.log($(this).data('league'));
+        console.log($(this).data('target'));
+        $($(this).data('target'))
+            .html(createCarouselViewHtml(LEAGUE_TEAMS[$(this).data('league')]));
+    });
+
+    $('.btn-buy').click(function (e) { 
+        e.preventDefault();
+        // TODO: get array of currently selected products
+        var selectedProduct = $(this).data('productId');
+        var productsInCart = sessionStorage.getItem('selectedProducts');
+        if(productsInCart) {
+            if (productsInCart.indexOf(selectedProduct)) {
+                console.log('Product already in cart');
+            }
+            else {
+                productsInCart.push(selectedProduct);
+            }
+        }
     });
 
     // REQUESTS
@@ -71,11 +90,10 @@ $(document).ready(function () {
     // GET all products of chosen league and team
     $('.team-toggle').click(function (e) { 
         e.preventDefault();
+        // store selected team for future use
         let team = $(this).data('team');
         sessionStorage.setItem('selectedTeam', team);
 
-        // TODO: create object from league and team selection
-        // Store last clicked league/team in variables?
         let d = {
             league: sessionStorage.getItem('selectedLeague'),
             team: team
@@ -89,7 +107,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 console.log(response.length);
-                if (response.length !== 0) {
+                if (response.length > 0) {
                     var returnedProducts = JSON.parse(response);
                     $('#team-upcoming-games')
                     .html(createProductViewHtml(returnedProducts, returnedProducts[0].league));
@@ -99,13 +117,10 @@ $(document).ready(function () {
                 }
             },
             error: function() {
-                console.log("Request failed");
+                console.log('Request failed');
             }
         });
     });
-
-    // Click carousel item, get productview
-    // $('')
 
     // GET all premier league games
     // $.ajax({

@@ -34,7 +34,7 @@ function createCarouselTeam(teamData) {
     //TODO: when talking with the database, teamData will be an object instead of a string, use accordingly
     var carouselTeam = '<div class="col-md-2 col-sm-4 col-xs-6">'
     +   '<a href="#" class="thumbnail team-toggle" role="button" data-team="'+teamData+'" data-toggle="collapse" data-target="#team-upcoming-games">'
-    +   '<h2>' +teamData+ '</h2>'
+    +   '<h3>' +teamData+ '</h3>'
     +   '</a></div>';
     return carouselTeam;
 }
@@ -94,7 +94,7 @@ function createProductDetailHtml(productData) {
     +       '<p>' + parseDate(productData.startdate) +'</p>' 
     +       '<p>' + parseTime(productData.startdate) + ' - ' + parseTime(productData.stopdate) + '</p>' 
     +       '<p>' + productData.price + ':-</p>' 
-    +       '<button class="btn btn-special btn-block" type="button">Köp</button>' 
+    +       '<button class="btn btn-buy btn-block" type="button" data-productId="'+productData.id+'">Köp</button>' 
     +   '</div>' 
     +'</div>';
     return productDetailBox;

@@ -31,13 +31,13 @@
     padding: -10px;
 }
 
-.btn-special {
+.btn-buy {
     @include border-radius(0px);
     background: $base-gray;
     color: $link-color;
 }
 
-.btn-special:hover {
+.btn-buy:hover {
     background: $brand-success;
     color: white;
 }

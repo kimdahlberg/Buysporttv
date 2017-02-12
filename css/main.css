@@ -5824,7 +5824,7 @@ button.close {
   margin: 10px;
   padding: -10px; }
 
-.btn-special {
+.btn-buy {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   -ms-border-radius: 0px;
@@ -5832,7 +5832,7 @@ button.close {
   background: #222728;
   color: #dddddd; }
 
-.btn-special:hover {
+.btn-buy:hover {
   background: #5cb85c;
   color: white; }
 
@@ -5883,15 +5883,22 @@ button.close {
 .carousel-indicators .active {
   background: #c0392b; }
 
-.item [class*="col-"] a {
-  background: #666666; }
+.thumbnail {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  border-radius: 2px;
+  background: gray;
+  min-height: 112px; }
 
 @media only screen and (max-width: 767px) {
   .carousel {
-    min-height: 300px; }
+    min-height: 436px; }
 
-  a.carousel-control .left, a.carousel-control .right {
-    display: none; } }
+  a.carousel-control {
+    margin-top: 168px; }
+    a.carousel-control .left, a.carousel-control .right {
+      display: none; } }
 .form-button {
   margin-left: 15px;
   margin-right: 15px; }
@@ -5994,7 +6001,7 @@ button.close {
   height: 80vh; }
 
 .modal-content {
-  background: rgba(255, 255, 255, 0.8); }
+  background: rgba(255, 255, 255, 0.9); }
 
 #football, #basketball, #hockey, #league-row [class*="col-"] {
   border-bottom: 5px solid transparent;
@@ -6009,8 +6016,7 @@ button.close {
 #league-row {
   margin-bottom: 20px; }
   #league-row [class*="col-"] {
-    padding-top: 30px;
-    padding-bottom: 30px; }
+    padding-top: 30px; }
 
 #upcoming-games a {
   font-size: 1.8rem;
@@ -6025,4 +6031,9 @@ button.close {
 
 @media only screen and (max-width: 767px) {
   h2 {
-    font-size: 2.2rem; } }
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+    font-size: 1.6rem; }
+
+  #league-row {
+    min-height: 100px; } }

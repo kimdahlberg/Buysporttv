@@ -1,4 +1,4 @@
-
+$min-height-thumbnail: 112px;
 .carousel {
     margin-bottom: 0;
     padding: 0 40px 30px 40px;
@@ -31,21 +31,19 @@
 background: $dark-red;
 }
 
-.item {
-
-    [class*="col-"] {
-        a {
-            background: lighten($dark-gray, 20%);
-        }
-    }
+.thumbnail {
+    @include border-radius(2px);
+    background: lighten($dark-gray, 30%);
+    min-height: $min-height-thumbnail;
 }
 
 @media only screen and (max-width: $small) {
 
     .carousel {
-        min-height: 300px;
+        min-height: ($min-height-thumbnail*3) + 100;
     }
     a.carousel-control {
+        margin-top: ($min-height-thumbnail*3) / 2;
 
         .left, .right {
             display: none;
