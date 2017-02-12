@@ -33,7 +33,7 @@ function createCarouselIndicators(numberOfIndicators) {
 function createCarouselTeam(teamData) {
     //TODO: when talking with the database, teamData will be an object instead of a string, use accordingly
     var carouselTeam = '<div class="col-md-2 col-sm-4 col-xs-6">'
-    +   '<a href="#" class="thumbnail team-toggle" role="button" data-team="'+teamData+'" data-toggle="collapse" data-target="#team-upcoming-games">'
+    +   '<a href="#" class="thumbnail team-toggle" role="button" data-team="'+teamData+'" data-toggle="tab" data-target="#team-upcoming-games">'
     +   '<h3>' +teamData+ '</h3>'
     +   '</a></div>';
     return carouselTeam;

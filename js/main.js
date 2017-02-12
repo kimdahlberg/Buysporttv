@@ -2,8 +2,7 @@ var selectedColor = '#c0392b';
 var inactiveColor = 'transparent';
 
 sessionStorage.setItem('selectedSport', 'football');
-sessionStorage.setItem('selectedLeague', 'serie a');
-sessionStorage.setItem('selectedTeam', 'Villarreal');
+sessionStorage.setItem('selectedLeague', 'premier league');
 
 
 // Add red bottom border to selected element
@@ -40,6 +39,7 @@ $(document).ready(function () {
         e.preventDefault();
         toggleActive(this);
         sessionStorage.setItem('selectedLeague', $(this).data('league'));
+        console.log(sessionStorage.getItem('selectedLeague'));
         $($(this).data('target'))
             .html(createCarouselViewHtml(LEAGUE_TEAMS[$(this).data('league')]));
     });
@@ -106,8 +106,9 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response.length);
                 if (response.length > 0) {
+                    let sectionTitle = d.team;
                     $('#team-upcoming-games')
-                    .html(createProductViewHtml(response, response[0].league));
+                    .html(createProductViewHtml(response, sectionTitle));
                 }
                 else {
                     $('#team-upcoming-games').html(createNoMatchesView('Inga matcher hittades'));
