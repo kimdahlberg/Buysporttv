@@ -7,62 +7,77 @@ function parseTime(dateObject) {
     return $.format.date(dateObject, "HH:mm");
 }
 
-
-/*
-    Functions to create html from data received from database
-*/
+/**
+ * Simple text view to display if query returns an empty set
+ */
+function createNoMatchesView(message) {
+    return '<h3 class="faded-border">' + message + '</h3>';
+}
 
 /**
  * Creates an indicator for every slide in the carousel
  */
 function createCarouselIndicators(numberOfIndicators) {
     var indicatorHtml =  '<ol class="carousel-indicators">';
-    for (var indicator = 0; indicator < numberOfIndicators; indicator++) {
+    indicatorHtml += '<li data-target="#carousel-teams" class="active" data-slide-to="'+0+'"></li>';
+    for (var indicator = 1; indicator < numberOfIndicators; indicator++) {
         indicatorHtml += '<li data-target="#carousel-teams" data-slide-to="'+indicator+'"></li>';
     }
     indicatorHtml += '</ol>';
     return indicatorHtml;
 }
+
 /**
  * Creates a thumbnail of selected team
  */
 function createCarouselTeam(teamData) {
     //TODO: when talking with the database, teamData will be an object instead of a string, use accordingly
     var carouselTeam = '<div class="col-md-2 col-sm-4 col-xs-6">'
-    +   '<a href="#" class="thumbnail" role="button" data-team="'+teamData+'" data-toggle="collapse" data-target="#team-upcoming-games">'
+    +   '<a href="#" class="thumbnail team-toggle" role="button" data-team="'+teamData+'" data-toggle="collapse" data-target="#team-upcoming-games">'
     +   '<h2>' +teamData+ '</h2>'
     +   '</a></div>';
     return carouselTeam;
 }
+
 /**
  * Creates a carousel filled with the teams of selected league
  */
 function createCarouselViewHtml(teamList) {
     var numOfTeams = teamList.length; 
     var numOfIndicators = Math.ceil(numOfTeams / 6); 
-    console.log(numOfIndicators);
+    var count = 0;
+    var count6 = 0;
 
     var carouselView = '<div id="carousel-teams" class="carousel slide">';
     carouselView += createCarouselIndicators(numOfIndicators);
 
-    // Create an item/slide for every indicator
-    carouselView += '<div class="carousel-inner">';  
-    for (var i = 0; i < numOfIndicators; i++) {      
-        carouselView += '<div class="item active">'
-        +   '<div class="row text-center ">'; 
-
-        // Create up to 6 team thumbnails on slide
-        for (var j = 0 + (6*i) ; j < 6 + (6*i) || j < numOfTeams; j++) {
-            carouselView += createCarouselTeam(
-                teamList[j]);
-            console.log(teamList[j]);
+    // create the slides with 6 teams max per page
+    carouselView += '<div class="carousel-inner">'; 
+    for (var team of teamList) {
+        if (count === 0 && count6 === 0) {
+            carouselView += '<div class="item active" data-indicator="'+count6+'">'
+            +   '<div class="row text-center ">'; 
         }
+        else if (count === 0) {
+            carouselView += '<div class="item" data-indicator="'+count6+'">'
+            +   '<div class="row text-center ">'; 
+        }
+        carouselView += createCarouselTeam(team);
+        count++;
+        if (count === 6) {
+            carouselView += '</div></div>';
+            count = 0;
+            count6++;
+        };
+    };
+    if (count > 0) {
         carouselView += '</div></div>';
     }
+
     carouselView += '</div>'
-    + '<a data-slide="prev" href="#carousel-teams" class="left carousel-control">‹</a>'
-    + '<a data-slide="next" href="#carousel-teams" class="right carousel-control">›</a>'
-    + '</div>';
+    +   '<a data-slide="prev" href="#carousel-teams" class="left carousel-control">‹</a>'
+    +   '<a data-slide="next" href="#carousel-teams" class="right carousel-control">›</a>'
+    +   '</div>';
     return carouselView;
 }
 
@@ -89,13 +104,13 @@ function createProductDetailHtml(productData) {
  * Displays all the products returned from the database
  */
 function createProductViewHtml(productList, title) {
-    var productViewBox = '<div class="row text-center">' +
+    var productViewRow = '<div class="row text-center">' +
         '<h1 class="col-md-12">' + title + '</h1>';
     for (var i = 0; i < productList.length; i++) {
         var pDetails = createProductDetailHtml(productList[i]);
-        productViewBox += pDetails;
+        productViewRow += pDetails;
     }
-    productViewBox += '</div>';
-    $('#team-upcoming-games').html(productViewBox);
+    productViewRow += '</div>';
+    return productViewRow;
 }
 

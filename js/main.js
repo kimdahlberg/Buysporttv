@@ -3,7 +3,7 @@ var inactiveColor = 'transparent';
 
 sessionStorage.setItem('selectedSport', 'football');
 sessionStorage.setItem('selectedLeague', 'serie a');
-sessionStorage.setItem('selectedTeam', 'napoli');
+sessionStorage.setItem('selectedTeam', 'Villarreal');
 
 
 // Add red bottom border to selected element
@@ -21,18 +21,25 @@ $(document).ready(function () {
         var dataLeague = sessionStorage.getItem('selectedLeague');
         var leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
         toggleActive(leagueButton);
+        // Create carouselview in div that leagueButton targets
         $(leagueButton.data('target'))
         .html(createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]));
-    };
+        // Set active item from team value in sessionStorage
+        var itemToActivate = $('.thumbnail[data-team="'+sessionStorage.getItem('selectedTeam')+'"]')
+        .parents('.item');
+        $('#carousel-teams').carousel(itemToActivate.data('indicator'));
+    }
 
     $('.sport-toggle').click(function (e) { 
         e.preventDefault();
         toggleActive(this);
+        sessionStorage.setItem('selectedSport', $(this).data('sport'));
     });
 
     $('.league-toggle').click(function (e) { 
         e.preventDefault();
         toggleActive(this);
+        sessionStorage.setItem('selectedLeague', $(this).data('league'));
     });
 
     // REQUESTS
@@ -64,13 +71,16 @@ $(document).ready(function () {
     // GET all products of chosen league and team
     $('.team-toggle').click(function (e) { 
         e.preventDefault();
+        let team = $(this).data('team');
+        sessionStorage.setItem('selectedTeam', team);
 
         // TODO: create object from league and team selection
         // Store last clicked league/team in variables?
-        var d = {
-            league: 'nhl',
-            team: 'carolina hurricanes'
+        let d = {
+            league: sessionStorage.getItem('selectedLeague'),
+            team: team
         };
+        console.log(d);
 
         $.ajax({
             type: "POST",
@@ -78,9 +88,15 @@ $(document).ready(function () {
             data: d,
             dataType: 'json',
             success: function (response) {
-                var returnedProducts = JSON.parse(response);
-                console.log(response);
-                createProductViewHtml(returnedProducts, sessionStorage.getItem('selectedLeague'));
+                console.log(response.length);
+                if (response.length !== 0) {
+                    var returnedProducts = JSON.parse(response);
+                    $('#team-upcoming-games')
+                    .html(createProductViewHtml(returnedProducts, returnedProducts[0].league));
+                }
+                else {
+                    $('#team-upcoming-games').html(createNoMatchesView('Inga matcher hittades'));
+                }
             },
             error: function() {
                 console.log("Request failed");
