@@ -33,7 +33,7 @@ function createCarouselIndicators(numberOfIndicators) {
 function createCarouselTeam(teamData) {
     //TODO: when talking with the database, teamData will be an object instead of a string, use accordingly
     var carouselTeam = '<div class="col-md-2 col-sm-4 col-xs-6">'
-    +   '<a href="#" class="thumbnail team-toggle" role="button" data-team="'+teamData+'" data-toggle="tab" data-target="#team-upcoming-games">'
+    +   '<a href="#" class="thumbnail team-toggle" role="button" data-team="'+teamData+'" data-target="#team-upcoming-games">'
     +   '<h3>' +teamData+ '</h3>'
     +   '</a></div>';
     return carouselTeam;
@@ -43,12 +43,12 @@ function createCarouselTeam(teamData) {
  * Creates a carousel filled with the teams of selected league
  */
 function createCarouselViewHtml(teamList) {
-    var numOfTeams = teamList.length; 
-    var numOfIndicators = Math.ceil(numOfTeams / 6); 
-    var count = 0;
-    var count6 = 0;
+    let numOfTeams = teamList.length; 
+    let numOfIndicators = Math.ceil(numOfTeams / 6); 
+    let count = 0;
+    let count6 = 0;
 
-    var carouselView = '<div id="carousel-teams" class="carousel slide">';
+    let carouselView = '<div id="carousel-teams" class="carousel slide">';
     carouselView += createCarouselIndicators(numOfIndicators);
 
     // create the slides with 6 teams max per page
@@ -78,6 +78,7 @@ function createCarouselViewHtml(teamList) {
     +   '<a data-slide="prev" href="#carousel-teams" class="left carousel-control">‹</a>'
     +   '<a data-slide="next" href="#carousel-teams" class="right carousel-control">›</a>'
     +   '</div>';
+    console.log(carouselView);
     return carouselView;
 }
 

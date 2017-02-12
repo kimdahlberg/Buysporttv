@@ -23,10 +23,6 @@ $(document).ready(function () {
         // Create carouselview in div that leagueButton targets
         $(leagueButton.data('target'))
             .html(createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]));
-        // // Set active item from team value in sessionStorage
-        // var itemToActivate = $('.thumbnail[data-team="'+sessionStorage.getItem('selectedTeam')+'"]')
-        // .parents('.item');
-        // $('#carousel-teams').carousel(itemToActivate.data('indicator'));
     }
 
     $('.sport-toggle').click(function (e) { 
@@ -38,10 +34,10 @@ $(document).ready(function () {
     $('.league-toggle').click(function (e) { 
         e.preventDefault();
         toggleActive(this);
-        sessionStorage.setItem('selectedLeague', $(this).data('league'));
-        console.log(sessionStorage.getItem('selectedLeague'));
-        $($(this).data('target'))
-            .html(createCarouselViewHtml(LEAGUE_TEAMS[$(this).data('league')]));
+        let target = $(this).data('target');
+        let league = $(this).data('league');
+        sessionStorage.setItem('selectedLeague', league);
+        $(target).html(createCarouselViewHtml(LEAGUE_TEAMS[league]));
     });
 
     $('.btn-buy').click(function (e) { 
@@ -85,8 +81,8 @@ $(document).ready(function () {
         });
     });
 
-    // GET all products of chosen league and team
-    $('.team-toggle').click(function (e) { 
+    $('#carousel-col').on('click', '.team-toggle', function(e) { 
+        console.log('TOGGLE YOU BASTARD');
         e.preventDefault();
         // store selected team for future use
         let team = $(this).data('team');
