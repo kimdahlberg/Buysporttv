@@ -7,6 +7,15 @@ function parseTime(dateObject) {
     return $.format.date(dateObject, "HH:mm");
 }
 
+function isInArray(array, value) {
+    for (let i = 0; i < array.length; i++) {
+        if (value === array[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /**
  * Simple text view to display if query returns an empty set
  */
@@ -78,7 +87,6 @@ function createCarouselViewHtml(teamList) {
     +   '<a data-slide="prev" href="#carousel-teams" class="left carousel-control">‹</a>'
     +   '<a data-slide="next" href="#carousel-teams" class="right carousel-control">›</a>'
     +   '</div>';
-    console.log(carouselView);
     return carouselView;
 }
 
@@ -95,7 +103,7 @@ function createProductDetailHtml(productData) {
     +       '<p>' + parseDate(productData.startdate) +'</p>' 
     +       '<p>' + parseTime(productData.startdate) + ' - ' + parseTime(productData.stopdate) + '</p>' 
     +       '<p>' + productData.price + ':-</p>' 
-    +       '<button class="btn btn-buy btn-block" type="button" data-productId="'+productData.id+'">Köp</button>' 
+    +       '<button class="btn btn-buy btn-block" type="button" data-product-id="'+productData.id+'">Köp</button>' 
     +   '</div>' 
     +'</div>';
     return productDetailBox;

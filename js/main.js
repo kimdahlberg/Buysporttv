@@ -4,7 +4,6 @@ var inactiveColor = 'transparent';
 sessionStorage.setItem('selectedSport', 'football');
 sessionStorage.setItem('selectedLeague', 'premier league');
 
-
 // Add red bottom border to selected element
 function toggleActive(selectedElement) {
     if(!$(selectedElement).hasClass('active')){
@@ -15,8 +14,9 @@ function toggleActive(selectedElement) {
 
 $(document).ready(function () {
 
-    // load teams of preselected league
-    if (sessionStorage.getItem('selectedLeague')) {
+    // load teams of preselected league on matcher.html page
+    console.log(document.title);
+    if (document.title === 'matchinfo' && sessionStorage.getItem('selectedLeague')) {
         var dataLeague = sessionStorage.getItem('selectedLeague');
         var leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
         toggleActive(leagueButton);
@@ -31,7 +31,8 @@ $(document).ready(function () {
         sessionStorage.setItem('selectedSport', $(this).data('sport'));
     });
 
-    $('.league-toggle').click(function (e) { 
+    $('.league-toggle.matcher-view').click(function (e) { 
+        console.log("BLAMMO");
         e.preventDefault();
         toggleActive(this);
         let target = $(this).data('target');
@@ -40,24 +41,34 @@ $(document).ready(function () {
         $(target).html(createCarouselViewHtml(LEAGUE_TEAMS[league]));
     });
 
-    $('.btn-buy').click(function (e) { 
+    $('#upcoming-games').on('click', '.btn-buy', function (e) { 
         e.preventDefault();
         // TODO: get array of currently selected products
-        var selectedProduct = $(this).data('productId');
-        var productsInCart = sessionStorage.getItem('selectedProducts');
-        if(productsInCart) {
-            if (productsInCart.indexOf(selectedProduct)) {
-                console.log('Product already in cart');
-            }
-            else {
+        let selectedProduct = $(this).data('product-id');
+        var productsInCart = null;
+        try {
+            productsInCart = JSON.parse(sessionStorage.getItem('selectedProducts'));
+            if (!isInArray(productsInCart, selectedProduct)) {
+                $(this).val('Tillagd!');
                 productsInCart.push(selectedProduct);
             }
+            else {
+                $(this).val('Redan tillagd!');
+            }
+        }
+        catch(err) {
+            console.log('No items stored yet. Creating cart');
+            productsInCart = [selectedProduct];
+            $(this).val('Tillagd!');
+        }
+        finally {
+            sessionStorage.setItem('selectedProducts', JSON.stringify(productsInCart));
         }
     });
 
     // REQUESTS
 
-    // Registration request
+    // Send request to register new customer
     $('#regButton').click(function (e) { 
         e.preventDefault();
         // create object from registration form
@@ -81,14 +92,13 @@ $(document).ready(function () {
         });
     });
 
+    // Request to get all products of selected league and team
     $('#carousel-col').on('click', '.team-toggle', function(e) { 
-        console.log('TOGGLE YOU BASTARD');
         e.preventDefault();
         // store selected team for future use
         let team = $(this).data('team');
         sessionStorage.setItem('selectedTeam', team);
-        console.log('Toggling team! \nStored team: ' + sessionStorage.getItem('selectedTeam')
-        +   '\nSelected team: ' + team);
+
         var d = {
             league: sessionStorage.getItem('selectedLeague'),
             team: team
@@ -100,7 +110,6 @@ $(document).ready(function () {
             data: d,
             dataType: 'json',
             success: function (response) {
-                console.log(response.length);
                 if (response.length > 0) {
                     let sectionTitle = d.team;
                     $('#team-upcoming-games')
@@ -112,6 +121,28 @@ $(document).ready(function () {
             },
             error: function() {
                 console.log('Request failed');
+            }
+        });
+    });
+
+    // Request to get upcoming games of selected league
+    $('.league-toggle.index-view').click(function (e) { 
+        console.log("BLAMMO");
+        e.preventDefault();
+        toggleActive(this);
+        let target = $(this).data('target');
+        let league = $(this).data('league');
+        sessionStorage.setItem('selectedLeague', league);
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost/buysporttv/api/products_premier_league.php",
+            dataType: "json",
+            success: function (response) {
+                createProductViewHtml(response, sessionStorage.getItem('selectedSport'));
+            },
+            error: function() {
+                console.log('Request for upcoming games failed.');
             }
         });
     });
