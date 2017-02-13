@@ -1,15 +1,3 @@
-<html>
-<head></head>
-<body>
-    <form action="login.php" method="post">
-    <label>Namn</label>
-    <input type="text" name="username">
-    <label>Lössenord</label>
-    <input type="password" name="password">
-    <input type="submit" name="submitLogin" value="Logga in">
-</body>
-</html>
-
 <?php
    
 session_start(); //Session så att inloggnigen sparas mellan de olika sidorna
@@ -43,7 +31,7 @@ session_start(); //Session så att inloggnigen sparas mellan de olika sidorna
              // $_SESSION['id'] = $result['id'];
               // $_SESSION['anvandarnamn'] = $user;
            
-               echo "<p>Du är inloggad!</p>";
+            //    echo "<p>Du är inloggad!</p>";
                
            } else {
                //Om värdet från databasen inte stämmer med värdet från input

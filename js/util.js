@@ -157,11 +157,36 @@ function createCheckoutProductHtml(product) {
     +   '</tr>';
     return html;
 }
-
+/**
+ * Create the table body of the checkout table
+ */
 function createCheckoutTableBodyHtml(productList) {
     let html = '';
     for (let product of productList) {
         html += createCheckoutProductHtml(product);
     }
     return html;
+}
+
+function createAdminProductHtml(product) {
+    let html =
+        '<tr>'
+    +       '<td>' + product.id + '</td>'
+    +       '<td>' + product.home + '</td>'
+    +       '<td>' + product.away +'</td>'
+    +       '<td>' + product.startdate + '</td>'
+    +       '<td>' + product.stopdate + '</td>'
+    +       '<td>' + product.price +'</td>'
+    +       '<td class="btn-toolbar">'
+    +           '<button type="" class="btn btn-danger glyphicon glyphicon-trash"></button>'
+    +           '<button type="" class="btn btn-warning glyphicon glyphicon-pencil"></button>'
+    +       '</td>'
+    +   '</tr>';
+}
+
+function createAdminTableBodyHtml(productList) {
+    let html = '';
+    for (product of productList) {
+        html += createAdminProductHtml(product);
+    }
 }

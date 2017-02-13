@@ -69,29 +69,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-th="Product">
-                            <div class="row">
-                                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
-                                <div class="col-sm-10">
-                                    <h4 class="nomargin">Atalanta - Napoli</h4>
-                                    <p>2017-02-27 19:45</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-th="Price">€2.99</td>
-                        <td class="actions text-right" data-th="">
-                            <button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>							
-                        </td>
-                    </tr>
+                    
                 </tbody>
                 <tfoot>
                     <tr class="visible-xs">
-                        <td class="text-center cart-total"><strong>Total €2.99</strong></td>
+                        <td class="text-center cart-total"></td>
                     </tr>
                     <tr>
-                        <td><a href="#" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i>Fortsätt handla</a></td>
-                        <td class="hidden-xs cart-total"><strong>Total €2.99</strong></td>
+                        <td><a href="javascript:history.back()" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i>Fortsätt handla</a></td>
+                        <td class="hidden-xs cart-total"></td>
                     </tr>
                 </tfoot>
             </table>
@@ -143,12 +129,24 @@
                                     <input type="email" class="form-control" id="inputEmailRegistration">
                                 </div>
                             </div>
+                            <div class="form-group">            
+                                <label for="inputConfirmEmailRegistration" class="col-md-3 form-label">Bekräfta E-post</label>
+                                <div class="col-md-9">
+                                    <input type="email" class="form-control" id="inputConfirmEmailRegistration">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="inputPasswordRegistration" class="col-md-3 form-label">Lösenord</label>
                                 <div class="col-md-9">
                                     <input type="password" class="form-control" id="inputPasswordRegistration">                         
                                 </div>
-                            </div>          
+                            </div>
+                            <div class="form-group">
+                                <label for="inputConfirmPasswordRegistration" class="col-md-3 form-label">Bekräfta lösenord</label>
+                                <div class="col-md-9">
+                                    <input type="password" class="form-control" id="inputConfirmPasswordRegistration">                         
+                                </div>
+                            </div>              
 
                             <div class="form-group">    
                                 <label for="" class="col-md-3 form-label">Förnamn</label> 
@@ -163,9 +161,9 @@
                                 </div>
                             </div>
                             <div class="form-group">    
-                                <label for="" class="col-md-3 form-label">Telefonnummer</label> 
+                                <label for="" class="col-md-3 form-label">Användarnamn</label> 
                                 <div class="col-md-9">
-                                    <input type="tel" class="form-control" id="">
+                                    <input type="text" class="form-control" id="inputUsernameRegistration">
                                 </div>
                             </div>
                         </div> <!--/registration-->
@@ -173,7 +171,7 @@
                     
                     <div class="col-md-12 faded-border checkout-block-margin">
 
-                        <!-- CREDIT CARD FORM STARTS HERE -->
+                        <!-- CREDIT CARD FORM -->
                             <div class="panel-heading display-table" >
                                 <div class="row display-tr" >
                                     <legend  >Kortbetalning</legend>
@@ -236,8 +234,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        <!-- CREDIT CARD FORM ENDS HERE -->
+                            </div> <!-- /CREDIT CARD FORM -->
                     </div>
 
                     <div class="col-md-12 checkout-block-margin">

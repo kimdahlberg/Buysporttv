@@ -4,7 +4,7 @@ include_once ("connect.php");
 
 if (isset($_POST['submitReg'])){
 
-	$regmessage = ['0','1'];
+	$regmessage = [0, 1];
  
 	// Tag bort eventuella blanksteg i början eller slutet
 	foreach($_POST as $key => $val){
@@ -17,7 +17,7 @@ if (isset($_POST['submitReg'])){
       $confirmemail     = $_POST['cemail'];  
       $password         = $_POST['fpassword'];
       $confirmpassword  = $_POST['cpassword'];
-
+	  $username 		= $_POST['username'];
 
   	// Kolla om emailen är upptaget och kopplat till tidigare registrerad användare. 
   	$STH = $pdo->prepare("SELECT email FROM users WHERE email = :email");
@@ -65,8 +65,8 @@ if (isset($_POST['submitReg'])){
 		$salt = mt_rand_str(31); // Ger en 31 tkn lång slumpsträng.
 		$hashed = hash("sha512", $password . $salt ); // Ger 128 tkn.
 
-	   $STH = $pdo->prepare("INSERT INTO users (firstname, lastname, email, Hashedpw, Salt)
-            VALUES('$firstname', '$lastname', '$email', '$hashed', '$salt')");
+	   $STH = $pdo->prepare("INSERT INTO users (firstname, lastname, email, username, Hashedpw, Salt)
+            VALUES('$firstname', '$lastname', '$email', '$username', '$hashed', '$salt')");
 
 		try {
 			$STH->execute();
