@@ -135,7 +135,7 @@ function createCheckoutProductHtml(product) {
     +                   '<img src="http://placehold.it/100x100" alt="..." class="img-responsive"/>'
     +               '</div>'
     +               '<div class="col-sm-10">'
-    +                   '<h4 class="nomargin">Atalanta - Napoli</h4>'
+    +                   '<h4 class="nomargin">' + product.home + ' - ' + product.away + '</h4>'
     +                   '<p>'   + parseDate(product.startdate) + '   ' 
                                 + parseTime(product.startdate) + ' - ' 
                                 + parseTime(product.stopdate) 
@@ -148,5 +148,13 @@ function createCheckoutProductHtml(product) {
     +           '<button class="btn btn-danger btn-sm btn-delete"><i class="glyphicon glyphicon-trash"></i></button>'
     +       '</td>'
     +   '</tr>';
+    return html;
 }
 
+function createCheckoutTableBodyHtml(productList) {
+    let html = '';
+    for (let product of productList) {
+        html += createCheckoutProductHtml(product);
+    }
+    return html;
+}
