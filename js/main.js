@@ -1,35 +1,19 @@
 var selectedColor = '#c0392b';
 var inactiveColor = 'transparent';
 
-// sessionStorage.setItem('selectedSport', 'football');
-// sessionStorage.setItem('selectedLeague', 'premier league');
-
-// Add red bottom border to selected element
-function toggleActive(selectedElement) {
-    if(!$(selectedElement).hasClass('active')){
-        $(selectedElement).siblings('.active').removeClass('active');
-    };
-    $(selectedElement).addClass('active');
-}
-
 $(document).ready(function () {
-    if (sessionStorage.getItem('userPrivileges')) {
-        
-    }
     // html setups for various pages
+    if (sessionStorage.getItem('userPrivileges')) {
+        // change functionality according to login status
+        initializeLoggedInView();
+    }
     if (document.title === 'matchinfo' && sessionStorage.getItem('selectedLeague')) {
-        let dataLeague = sessionStorage.getItem('selectedLeague');
-        let leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
-        toggleActive(leagueButton);
-        // Create carouselview in div that leagueButton targets
-        $(leagueButton.data('target'))
-            .html(createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]));
+        initializeMatches();
     }
     else if (document.title === 'kundvagn') {
-        // TODO: request products by their ids
-        initializeCart();
-        
+        initializeCart();  
     }
+
 
     // BUTTON EVENTS 
 

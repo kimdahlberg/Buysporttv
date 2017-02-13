@@ -1,3 +1,10 @@
+// Add red bottom border to selected element
+function toggleActive(selectedElement) {
+    if(!$(selectedElement).hasClass('active')){
+        $(selectedElement).siblings('.active').removeClass('active');
+    };
+    $(selectedElement).addClass('active');
+}
 // Get the date from sql datetime object
 function parseDate(dateObject) {
     return $.format.date(dateObject, "dd-MM-yyyy");
@@ -8,8 +15,8 @@ function parseTime(dateObject) {
 }
 
 function isInArray(array, value) {
-    for (let i = 0; i < array.length; i++) {
-        if (value === array[i]) {
+    for (var i = 0; i < array.length; i++) {
+        if (value.id === array[i].id) {
             return true;
         }
     }
@@ -110,7 +117,7 @@ function createProductDetailHtml(product) {
     +       '<p>' + parseDate(product.startdate) +'</p>' 
     +       '<p>' + parseTime(product.startdate) + ' - ' + parseTime(product.stopdate) + '</p>' 
     +       '<p>' + product.price + ':-</p>' 
-    +       '<button class="btn btn-buy btn-block" type="button" data-product-id="'+product.id+'">Köp</button>' 
+    +       '<button class="btn btn-buy btn-block" type="button" data-product-id="'+product+'">Köp</button>' 
     +   '</div>' 
     +'</div>';
     return productDetailBox;
