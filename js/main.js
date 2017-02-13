@@ -13,7 +13,9 @@ function toggleActive(selectedElement) {
 }
 
 $(document).ready(function () {
-
+    if (sessionStorage.getItem('userPrivileges')) {
+        
+    }
     // html setups for various pages
     if (document.title === 'matchinfo' && sessionStorage.getItem('selectedLeague')) {
         let dataLeague = sessionStorage.getItem('selectedLeague');

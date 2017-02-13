@@ -16,6 +16,13 @@ function isInArray(array, value) {
     return false;
 }
 
+function createNavLoginHtml() {
+    return '<a href="#" data-toggle="modal" data-target="#loginModal" >Logga in</a>';
+}
+function createNavLogoutHtml() {
+    return '<a href="#" role="button">Logga ut</a>';
+}
+
 /**
  * Simple text view to display if query returns an empty set
  */
