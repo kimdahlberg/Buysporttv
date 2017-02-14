@@ -27,7 +27,7 @@ function createNavLoginHtml() {
     return '<a href="#" data-toggle="modal" data-target="#loginModal" >Logga in</a>';
 }
 function createNavLogoutHtml() {
-    return '<a href="#" role="button">Logga ut</a>';
+    return '<a href="#" class="btn-logout" role="button">Logga ut</a>';
 }
 
 /**
@@ -175,6 +175,9 @@ function createCheckoutTableBodyHtml(productList) {
     return html;
 }
 
+/**
+ * Create a product row
+ */
 function createAdminProductHtml(product) {
     let html =
         '<tr>'
@@ -184,16 +187,20 @@ function createAdminProductHtml(product) {
     +       '<td>' + product.startdate + '</td>'
     +       '<td>' + product.stopdate + '</td>'
     +       '<td>' + product.price +'</td>'
-    +       '<td class="btn-toolbar">'
+    +       '<td class="btn-toolbar" data-id="'+product.id+'">'
     +           '<button type="" class="btn btn-danger glyphicon glyphicon-trash"></button>'
     +           '<button type="" class="btn btn-warning glyphicon glyphicon-pencil"></button>'
     +       '</td>'
     +   '</tr>';
 }
 
+/**
+ * Create a table of products
+ */
 function createAdminTableBodyHtml(productList) {
     let html = '';
     for (product of productList) {
         html += createAdminProductHtml(product);
     }
+    return html;
 }

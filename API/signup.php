@@ -65,8 +65,8 @@ if (isset($_POST['submitReg'])){
 		$salt = mt_rand_str(31); // Ger en 31 tkn lång slumpsträng.
 		$hashed = hash("sha512", $password . $salt ); // Ger 128 tkn.
 
-	    $STH = $pdo->prepare("INSERT INTO users (firstname, lastname, email, Hashedpw, Salt)
-            VALUES('$firstname', '$lastname', '$email', '$password', '$salt')");
+	    $STH = $pdo->prepare("INSERT INTO users (firstname, lastname, email, username, Hashedpw, Salt)
+            VALUES('$firstname', '$lastname', '$email', '$username', '$password', '$salt')");
 
 
 		try {
@@ -91,7 +91,6 @@ if (isset($_POST['submitReg'])){
 		else {
 		echo json_encode($regmessage[0]);
 	}
-
 }
 
 $error_list[0] = "Alla obligatoriska fält är inte ifyllda.";

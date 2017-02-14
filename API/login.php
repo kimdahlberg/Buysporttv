@@ -1,7 +1,6 @@
 <?php
-   
 session_start(); //Session så att inloggnigen sparas mellan de olika sidorna
-   require "config.php";
+   require "connect.php";
    
   //Om någon trycker på knappen
    if (isset($_POST['submitLogin'])) {
@@ -11,28 +10,26 @@ session_start(); //Session så att inloggnigen sparas mellan de olika sidorna
 
            //Om det inte står något i användarnamn och lösenord
        if (empty($user) && empty($pass)) {
-           
            //Om fälten är tomma
-           die("Vänligen fyll i fälten");    
+           die("<p>Vänligen fyll i fälten</p>");    
            
        }
 
            //Stämmer användarnamnet överens med db
-           $sql = "SELECT id, firstname, lastname, username, email FROM users WHERE username = :users";
+           $sql = "SELECT id, firstname, lastname, email, username, hashedpw FROM users WHERE username = :user AND hashedpw = :pass";
            $statement = $pdo->prepare($sql);
-           $statement->bindParam(':users', $user);
-        //    $statement->execute (array('users' => $user ));
+        //    $statement->execute (array('username' => $user, 'Hashedpw' => $pass ));
+            $statement->bindParam(":user", $user);
+            $statement->bindParam(":pass", $pass);
+            $statement->execute();
            
            $result = $statement->fetch(PDO::FETCH_ASSOC);
-        //    $hass = $result['password'];
-              //Om värdet från databasen stämmer överäns med värdet från input  
-           if (!empty($result)) {
+           $hass = $result['hashedpw'];
 
-             // $_SESSION['id'] = $result['id'];
-              // $_SESSION['anvandarnamn'] = $user;
-           
-            //    echo "<p>Du är inloggad!</p>";
-                die("It works");
+              //Om värdet från databasen stämmer överäns med värdet från input  
+           if ($pass == $hass) {
+              $_SESSION['id'] = $result['id'];
+              $_SESSION['anvandarnamn'] = $user;
                
            } else {
                //Om värdet från databasen inte stämmer med värdet från input
@@ -40,9 +37,8 @@ session_start(); //Session så att inloggnigen sparas mellan de olika sidorna
            }
          
 
-// $arr = ["firstname", "lastname", "username", "password", "email" => "value"];
-// echo json_encode($arr);
-    echo json_encode($result);
+$arr = ["firstname" => $result['firstname'], "lastname" => $result['lastname'], "username" => $result['username'], "password" => $result['hashedpw'], "email" => $result['email']];
+echo json_encode($arr);
 }
 
 

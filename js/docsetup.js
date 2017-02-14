@@ -6,6 +6,10 @@ function initializeLoggedInView() {
     $('#login-logout').html(createNavLogoutHtml());
 }
 
+function initializeLoggedOutView() {
+    $('#login-logout').html(createNavLoginHtml());
+}
+
 /**
  * Init code for matches page. Creates a carousel with team names.
  */

@@ -3,7 +3,7 @@ var inactiveColor = 'transparent';
 
 $(document).ready(function () {
     // html setups for various pages
-    if (sessionStorage.getItem('userPrivileges')) {
+    if (sessionStorage.getItem('userPrivileges') !== 'undefined') {
         // change functionality according to login status
         initializeLoggedInView();
     }
@@ -11,11 +11,17 @@ $(document).ready(function () {
         initializeMatches();
     }
     else if (document.title === 'kundvagn') {
-        initializeCart();  
+        initializeCart();
     }
 
 
     // BUTTON EVENTS 
+
+    // Log out user
+    $(document).on('click', '.btn-logout', function(e){
+        sessionStorage.removeItem('userPrivileges');
+        initializeLoggedOutView();
+    });
 
     $('.sport-toggle').click(function (e) { 
         e.preventDefault();
@@ -57,11 +63,39 @@ $(document).ready(function () {
         }
     });
 
+    // Delete product from checkout
+    $('tbody').on('click', '.deleteCustomerProduct', function(e) {
+        e.preventDefault();
+
+    })
+
     // REQUESTS
 
+    // Delete product from database
+    $('tbody').on('click', '.deleteProduct', function(e) {
+        e.preventDefault();
+        // console.log(this);
+        let button = this;
+        let id = $(this).parent().data('id');
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/buysporttv/api/matcher.php",
+            data: id,
+            dataType: "json",
+            success: function (isRemoved) {
+                if (isRemoved === true) {
+                    let elementToRemove = $(button).parents('tr');
+                    $($(button).parents('tr')).remove();
+                }
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    });
+
     // Request to get upcoming games of selected league
-    $('.league-toggle.index-view').click(function (e) { 
-        console.log("BLAMMO");
+    $('.league-toggle.index-view').click(function (e) {
         e.preventDefault();
         toggleActive(this);
         let target = $(this).data('target');
@@ -69,17 +103,20 @@ $(document).ready(function () {
         sessionStorage.setItem('selectedLeague', league);
 
         $.ajax({
-            type: "GET",
-            url: "http://localhost/buysporttv/api/products_premier_league.php",
+            type: "POST",
+            url: "http://localhost/buysporttv/api/matcher.php",
+            data: league,
             dataType: "json",
             success: function (response) {
-                createProductViewHtml(response, sessionStorage.getItem('selectedSport'));
+                $(target).html(createProductViewHtml(response, league));
             },
             error: function() {
                 console.log('Request for upcoming games failed.');
             }
         });
     });
+
+    
 
     // Registration request
     $('#regButton').click(function (e) { 
@@ -120,7 +157,7 @@ $(document).ready(function () {
         d.username = $('#inputUsernameModal').val();
         d.password = $('#inputPasswordModal').val();
         d.submitLogin = true;
-        console.log(d);
+        
         $.ajax({
             type: "POST",
             url: "http://localhost/buysporttv/api/login.php",
@@ -128,6 +165,8 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 // Store 1 in userPrivileges on successful login
+                sessionStorage.setItem('userPrivileges', 1);
+                initializeLoggedInView();
             },
             error: function(response) {
                 console.log('Error: ');
@@ -135,11 +174,6 @@ $(document).ready(function () {
                 alert(response.responseText);
             }
         });
-    });
-
-    // log out user by setting sessionStorage to 
-    $(document).on('click', '.btn-logout', function(e){
-        sessionStorage.removeItem('userPrivileges');
     });
 
     // Request to get all products of selected league and team
@@ -174,17 +208,4 @@ $(document).ready(function () {
             }
         });
     });
-
-    // GET all premier league games
-    // $.ajax({
-    //     type: "GET",
-    //     url: "http://localhost/buysporttv/api/products_premier_league.php",
-    //     // dataType: 'json',
-    //     success: function (response) {
-    //         var returnedProducts = JSON.parse(response);
-    //         console.log(response);
-    //         console.log(returnedProducts);
-    //         createProductViewHtml(returnedProducts, 'Some Team');
-    //     }
-    // });
 });
