@@ -4,6 +4,10 @@ var cartTotal = 0;
 
 $(document).ready(function () {
     // html setups for various pages
+    numOfProducts = JSON.parse(sessionStorage.getItem('selectedProducts'));
+    if (numOfProducts.length > 0) {
+        $('.glyphicon-shopping-cart').text(numOfProducts.length);
+    }
     if (sessionStorage.getItem('userPrivileges') !== 'undefined') {
         // change functionality according to login status
         initializeLoggedInView();
@@ -43,7 +47,7 @@ $(document).ready(function () {
     // Press button to store product locally for displaying in cart
     $('#upcoming-games').on('click', '.btn-buy', function (e) { 
         e.preventDefault();
-        let selectedProduct = JSON.parse($(this).data('product-id'));
+        let selectedProduct = $(this).data('json');
         let productsInCart = null;
         // receive object array from sessionStorage
         try {
@@ -70,18 +74,19 @@ $(document).ready(function () {
     $('tbody').on('click', '.deleteCustomerProduct', function(e) {
         e.preventDefault();
         let button = this;
-        console.log($(button).data('json'));
-        // // Get product data stored as json in button
-        // let productsInCart = JSON.parse(sessionStorage.getItem('selectedProducts'));
-        // let index = isInArray(productsInCart, JSON.parse($(button).data('json')));
-        // if (index !== false) {
-        //     productsInCart.splice(index, 1);
-        //     sessionStorage.setItem('selectedProducts', JSON.stringify(productsInCart));
-        // }
-        // // TODO: reduce cartTotal by price of removed product
-        cartTotal -= 44;
-        // Remove product
+        // Get product data stored as json in button
+        let product = $(button).data('json');
+        // Get list of products user put in cart
+        let productsInCart = JSON.parse(sessionStorage.getItem('selectedProducts'));
+        // Find index of product and remove it from sessionStorage
+        let index = isInArray(productsInCart, product);
+        if (index !== false) {
+            productsInCart.splice(index, 1);
+            sessionStorage.setItem('selectedProducts', JSON.stringify(productsInCart));
+        }
+        cartTotal -= product.price;    
         $('.cart-total strong').text(cartTotal + " :-");
+        // Remove product
         let elementToRemove = $(button).parents('tr');
         $(elementToRemove).remove();
     })
@@ -184,6 +189,7 @@ $(document).ready(function () {
             success: function (response) {
                 // Store 1 in userPrivileges on successful login
                 sessionStorage.setItem('userPrivileges', 1);
+                $('.modal-footer button').trigger('click');
                 initializeLoggedInView();
             },
             error: function(response) {

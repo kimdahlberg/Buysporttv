@@ -7,8 +7,11 @@ function toggleActive(selectedElement) {
     };
     $(selectedElement).addClass('active');
 }
+// TODO: remove active from leagues of other sports
+function removeActive(selectedElement) {
 
-functin removeActive
+} 
+
 /**
  *  Get the date from sql datetime
  */
@@ -30,9 +33,17 @@ function isInArray(array, object) {
     for (let i = 0; i < array.length; i++) {
         if (object.id === array[i].id) {
             return i;
+            console.log(array[i].id);
+            console.log(object.id);
         }
     }
     return false;
+}
+// TODO: make adding number to cart glyph a function
+function updateCartCount() {
+    // sessionStorage.getItem('selectedProducts')
+    // JSOn parse
+    // check length
 }
 
 /**
@@ -86,15 +97,15 @@ function createCarouselTeam(teamData) {
 function createCarouselViewHtml(teamList) {
     let numOfTeams = teamList.length; 
     let numOfIndicators = Math.ceil(numOfTeams / 6); 
-
+    let count = 0;
+    let count6 = 0;
     let carouselView = '<div id="carousel-teams" class="carousel slide">';
     carouselView += createCarouselIndicators(numOfIndicators);
 
     // create the items (slides) with 6 teams max per page
     carouselView += '<div class="carousel-inner">'; 
     for (var team of teamList) {
-        var count = 0;
-        var count6 = 0;
+        
         // If the absolute first item, set it as active
         if (count === 0 && count6 === 0) {
             carouselView += '<div class="item active" data-indicator="'+count6+'">'
@@ -142,7 +153,7 @@ function createProductDetailHtml(product) {
     +       '<p>' + parseDate(product.startdate) +'</p>' 
     +       '<p>' + parseTime(product.startdate) + ' - ' + parseTime(product.stopdate) + '</p>' 
     +       '<p>' + product.price + ':-</p>' 
-    +       '<button class="btn btn-buy btn-block" type="button" data-product-id=\''+ JSON.stringify(product) +'\'>Köp</button>' 
+    +       '<button class="btn btn-buy btn-block" type="button" data-json=\''+ JSON.stringify(product) +'\'>Köp</button>' 
     +   '</div>' 
     +'</div>';
     return productDetailBox;
