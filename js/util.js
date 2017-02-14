@@ -7,6 +7,8 @@ function toggleActive(selectedElement) {
     };
     $(selectedElement).addClass('active');
 }
+
+functin removeActive
 /**
  *  Get the date from sql datetime
  */
@@ -21,12 +23,13 @@ function parseTime(sqlDateTime) {
 }
 
 /**
- * Check if object is in array
+ * Check if object is in array.
+ * Return index, or false if not found
  */
 function isInArray(array, object) {
-    for (var i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         if (object.id === array[i].id) {
-            return true;
+            return i;
         }
     }
     return false;
@@ -139,7 +142,7 @@ function createProductDetailHtml(product) {
     +       '<p>' + parseDate(product.startdate) +'</p>' 
     +       '<p>' + parseTime(product.startdate) + ' - ' + parseTime(product.stopdate) + '</p>' 
     +       '<p>' + product.price + ':-</p>' 
-    +       '<button class="btn btn-buy btn-block" type="button" data-product-id="'+ JSON.stringify(product) +'">Köp</button>' 
+    +       '<button class="btn btn-buy btn-block" type="button" data-product-id=\''+ JSON.stringify(product) +'\'>Köp</button>' 
     +   '</div>' 
     +'</div>';
     return productDetailBox;
@@ -182,7 +185,7 @@ function createCheckoutProductHtml(product) {
     +       '</td>'
     +       '<td data-th="Price">' + product.price + ' :-' + '</td>'
     +       '<td class="actions text-right" data-th="">'
-    +           '<button class="btn btn-danger btn-sm btn-delete"><i class="glyphicon glyphicon-trash"></i></button>'
+    +           '<button class="btn btn-danger btn-sm deleteCustomerProduct" data-json=\'' + JSON.stringify(product) + '\'><i class="glyphicon glyphicon-trash"></i></button>'
     +       '</td>'
     +   '</tr>';
     return html;

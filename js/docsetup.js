@@ -33,12 +33,11 @@ function initializeCart() {
         dataType: 'json',
         success: function (response) {
             $('#cart tbody').html(createCheckoutTableBodyHtml(response));
-            let total = 0;
             for (let product of response) {
-                total += parseInt(product.price);
+                cartTotal += parseInt(product.price);
             }
-            console.log(total);
-            $('.cart-total').html('<strong>Total: ' + total + ':-</strong>');
+            console.log(cartTotal);
+            $('.cart-total').html('<strong>Total: ' + cartTotal + ':-</strong>');
         }
     });
 }

@@ -1,5 +1,6 @@
 var selectedColor = '#c0392b';
 var inactiveColor = 'transparent';
+var cartTotal = 0;
 
 $(document).ready(function () {
     // html setups for various pages
@@ -39,14 +40,15 @@ $(document).ready(function () {
         $(target).html(createCarouselViewHtml(LEAGUE_TEAMS[league]));
     });
 
-    // press button to store product locally for displaying in cart
+    // Press button to store product locally for displaying in cart
     $('#upcoming-games').on('click', '.btn-buy', function (e) { 
         e.preventDefault();
         let selectedProduct = JSON.parse($(this).data('product-id'));
         let productsInCart = null;
+        // receive object array from sessionStorage
         try {
             productsInCart = JSON.parse(sessionStorage.getItem('selectedProducts'));
-            if (!isInArray(productsInCart, selectedProduct)) {
+            if (isInArray(productsInCart, selectedProduct) === false) {
                 $(this).val('Tillagd!');
                 productsInCart.push(selectedProduct);
             }
@@ -54,7 +56,7 @@ $(document).ready(function () {
                 $(this).val('Redan tillagd!');
             }
         }
-        catch(err) {
+        catch(err) { // Parse failed, which means nothing's been stored so far
             console.log('No items stored yet. Creating cart');
             productsInCart = [selectedProduct];
             $(this).val('Tillagd!');
@@ -67,7 +69,21 @@ $(document).ready(function () {
     // Delete product from checkout
     $('tbody').on('click', '.deleteCustomerProduct', function(e) {
         e.preventDefault();
-
+        let button = this;
+        console.log($(button).data('json'));
+        // // Get product data stored as json in button
+        // let productsInCart = JSON.parse(sessionStorage.getItem('selectedProducts'));
+        // let index = isInArray(productsInCart, JSON.parse($(button).data('json')));
+        // if (index !== false) {
+        //     productsInCart.splice(index, 1);
+        //     sessionStorage.setItem('selectedProducts', JSON.stringify(productsInCart));
+        // }
+        // // TODO: reduce cartTotal by price of removed product
+        cartTotal -= 44;
+        // Remove product
+        $('.cart-total strong').text(cartTotal + " :-");
+        let elementToRemove = $(button).parents('tr');
+        $(elementToRemove).remove();
     })
 
     // REQUESTS
@@ -86,7 +102,7 @@ $(document).ready(function () {
             success: function (isRemoved) {
                 if (isRemoved === true) {
                     let elementToRemove = $(button).parents('tr');
-                    $($(button).parents('tr')).remove();
+                    $(elementToRemove).remove();
                 }
             },
             error: function (response) {
