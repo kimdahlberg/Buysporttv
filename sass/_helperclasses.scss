@@ -31,6 +31,10 @@
     padding: -10px;
 }
 
+.btn-add {
+    width: 90px;
+}
+
 .btn-buy {
     @include border-radius(0px);
     background: $base-gray;

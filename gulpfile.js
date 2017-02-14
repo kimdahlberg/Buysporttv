@@ -3,7 +3,6 @@ var sass = require('gulp-ruby-sass');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
-//
 gulp.task('sass', function() {
   return sass('sass/main.scss')
     .pipe(gulp.dest('css/'))

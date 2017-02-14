@@ -5824,6 +5824,9 @@ button.close {
   margin: 10px;
   padding: -10px; }
 
+.btn-add {
+  width: 90px; }
+
 .btn-buy {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;

@@ -1,47 +1,19 @@
 var selectedColor = '#c0392b';
 var inactiveColor = 'transparent';
 
-// sessionStorage.setItem('selectedSport', 'football');
-// sessionStorage.setItem('selectedLeague', 'premier league');
-
-// Add red bottom border to selected element
-function toggleActive(selectedElement) {
-    if(!$(selectedElement).hasClass('active')){
-        $(selectedElement).siblings('.active').removeClass('active');
-    };
-    $(selectedElement).addClass('active');
-}
-
 $(document).ready(function () {
-    if (sessionStorage.getItem('userPrivileges')) {
-        
-    }
     // html setups for various pages
+    if (sessionStorage.getItem('userPrivileges')) {
+        // change functionality according to login status
+        initializeLoggedInView();
+    }
     if (document.title === 'matchinfo' && sessionStorage.getItem('selectedLeague')) {
-        let dataLeague = sessionStorage.getItem('selectedLeague');
-        let leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
-        toggleActive(leagueButton);
-        // Create carouselview in div that leagueButton targets
-        $(leagueButton.data('target'))
-            .html(createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]));
+        initializeMatches();
     }
     else if (document.title === 'kundvagn') {
-        // TODO: request products by their ids
-        $.ajax({
-            type: "GET",
-            url: "http://localhost/buysporttv/api/products_premier_league.php",
-            dataType: 'json',
-            success: function (response) {
-                $('#cart tbody').html(createCheckoutTableBodyHtml(response));
-                let total = 0;
-                for (let product of response) {
-                    total += parseInt(product.price);
-                }
-                console.log(total);
-                $('.cart-total').html('<strong>Total: ' + total + ':-</strong>');
-            }
-        });
+        initializeCart();  
     }
+
 
     // BUTTON EVENTS 
 
@@ -117,9 +89,10 @@ $(document).ready(function () {
         d.fname = $('#inputFirstNameRegistration').val();
         d.lname = $('#inputLastNameRegistration').val();
         d.fpassword = $('#inputPasswordRegistration').val();
-        d.cpassword = $('#inputPasswordRegistration').val();
+        d.cpassword = $('#inputConfirmPasswordRegistration').val();
         d.femail = $('#inputEmailRegistration').val();
-        d.cemail = $('#inputEmailRegistration').val();
+        d.cemail = $('#inputConfirmEmailRegistration').val();
+        d.username = $('#inputUsernameRegistration').val();
         d.submitReg = 1;
 
         // Send request to php
@@ -129,6 +102,13 @@ $(document).ready(function () {
             data: d,
             success: function (response) {
                 console.log(response);
+                // check response for a successful registration
+                if (response === "1") {
+                    alert('Du är nu registrerad. Tack för ditt köp!');
+                }
+                else {
+                    alert('Registreringen misslyckades');
+                }
             }
         });
     });
@@ -136,23 +116,30 @@ $(document).ready(function () {
     // Login request 
     $(document).on('click', '.btn-login', function(e) {
         e.preventDefault();
-        console.log('CLICKETY CLACK');
         let d = {};
         d.username = $('#inputUsernameModal').val();
         d.password = $('#inputPasswordModal').val();
+        d.submitLogin = true;
         console.log(d);
         $.ajax({
             type: "POST",
             url: "http://localhost/buysporttv/api/login.php",
-            data: "d",
+            data: d,
             dataType: "json",
             success: function (response) {
-                console.log(response);
+                // Store 1 in userPrivileges on successful login
             },
             error: function(response) {
+                console.log('Error: ');
                 console.log(response);
+                alert(response.responseText);
             }
         });
+    });
+
+    // log out user by setting sessionStorage to 
+    $(document).on('click', '.btn-logout', function(e){
+        sessionStorage.removeItem('userPrivileges');
     });
 
     // Request to get all products of selected league and team
