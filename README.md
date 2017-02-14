@@ -36,7 +36,7 @@ School project 2017
 <li>CSS</li>
 <li>SASS</li>
 <li>Bootstrap</li>
-<li>node.js</li>
+<li>npm</li>
 <li>gulp</li>
 
 
