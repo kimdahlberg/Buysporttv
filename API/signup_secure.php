@@ -66,7 +66,7 @@ if (isset($_POST['submitReg'])){
 		$hashed = hash("sha512", $password . $salt ); // Ger 128 tkn.
 
 	   $STH = $pdo->prepare("INSERT INTO users (firstname, lastname, email, Hashedpw, Salt)
-            VALUES('$firstname', '$lastname', '$email', '$password', '$salt')");
+            VALUES('$firstname', '$lastname', '$email', '$hashed', '$salt')");
 
 		try {
 			$STH->execute();
