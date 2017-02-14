@@ -102,7 +102,8 @@ $(document).ready(function () {
             data: d,
             success: function (response) {
                 console.log(response);
-                if (response === 1) {
+                // check response for a successful registration
+                if (response === "1") {
                     alert('Du är nu registrerad. Tack för ditt köp!');
                 }
                 else {
@@ -118,6 +119,7 @@ $(document).ready(function () {
         let d = {};
         d.username = $('#inputUsernameModal').val();
         d.password = $('#inputPasswordModal').val();
+        d.submitLogin = true;
         console.log(d);
         $.ajax({
             type: "POST",
@@ -130,12 +132,13 @@ $(document).ready(function () {
             error: function(response) {
                 console.log('Error: ');
                 console.log(response);
+                alert(response.responseText);
             }
         });
     });
 
     // log out user by setting sessionStorage to 
-    $(document).on('click', '.btn-login', function(e){
+    $(document).on('click', '.btn-logout', function(e){
         sessionStorage.removeItem('userPrivileges');
     });
 
