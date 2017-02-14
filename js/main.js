@@ -39,10 +39,11 @@ $(document).ready(function () {
         $(target).html(createCarouselViewHtml(LEAGUE_TEAMS[league]));
     });
 
+    // press button to store product locally for displaying in cart
     $('#upcoming-games').on('click', '.btn-buy', function (e) { 
         e.preventDefault();
-        let selectedProduct = $(this).data('product-id');
-        var productsInCart = null;
+        let selectedProduct = JSON.parse($(this).data('product-id'));
+        let productsInCart = null;
         try {
             productsInCart = JSON.parse(sessionStorage.getItem('selectedProducts'));
             if (!isInArray(productsInCart, selectedProduct)) {
@@ -137,10 +138,11 @@ $(document).ready(function () {
             type: "POST",
             url: "http://localhost/buysporttv/api/signup.php",
             data: d,
+            dataType: "json",
             success: function (response) {
                 console.log(response);
                 // check response for a successful registration
-                if (response === "1") {
+                if (response === 1) {
                     alert('Du är nu registrerad. Tack för ditt köp!');
                 }
                 else {
