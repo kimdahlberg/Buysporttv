@@ -212,9 +212,11 @@ $(document).ready(function () {
             team: team
         };
 
+        $('#upcoming-games').html(createLoadingHtml());
+
         $.ajax({
             type: "POST",
-            url: "http://localhost/buysporttv/api/products_ALL_match.php",
+            url: "/api/products_ALL_match.php",
             data: d,
             dataType: 'json',
             success: function (response) {
