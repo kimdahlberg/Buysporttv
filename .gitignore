@@ -9,6 +9,7 @@ node_modules/
 *.lip
 
 config.php
+connect.php
 
 domain
 todo

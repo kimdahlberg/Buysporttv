@@ -1,8 +1,8 @@
 <?php 
-$host_name = "localhost";
-$database = "projekt4"; 	 // Change your database name
-$username = "root";          // Your database user id 
-$password = "root";          // Your password
+$host_name = "mysql525.loopia.se";
+$database = "zocomutbildning_se_db_2"; 	 // Change your database name
+$username = "buysport@z164405";          // Your database user id 
+$password = "12buysp0rt7v89";          // Your password
 
 //////// Do not Edit below /////////
 try {
