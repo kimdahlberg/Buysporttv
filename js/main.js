@@ -1,6 +1,7 @@
 var selectedColor = '#c0392b';
 var inactiveColor = 'transparent';
 var cartTotal = 0;
+const rootUrl = "/buysporttv";
 
 $(document).ready(function () {
     // html setups for various pages
@@ -101,7 +102,7 @@ $(document).ready(function () {
         let id = $(this).parent().data('id');
         $.ajax({
             type: "POST",
-            url: "http://localhost/buysporttv/api/matcher.php",
+            url: rootUrl + "/api/matcher.php",
             data: id,
             dataType: "json",
             success: function (isRemoved) {
@@ -126,7 +127,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "http://localhost/buysporttv/api/matcher.php",
+            url: rootUrl + "/api/matcher.php",
             data: league,
             dataType: "json",
             success: function (response) {
@@ -157,7 +158,7 @@ $(document).ready(function () {
         // Send request to php
         $.ajax({
             type: "POST",
-            url: "http://localhost/buysporttv/api/signup.php",
+            url: "/api/signup.php",
             data: d,
             dataType: "json",
             success: function (response) {
@@ -183,7 +184,7 @@ $(document).ready(function () {
         
         $.ajax({
             type: "POST",
-            url: "http://localhost/buysporttv/api/login.php",
+            url: rootUrl + "/api/login.php",
             data: d,
             dataType: "json",
             success: function (response) {
@@ -216,7 +217,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/api/products_ALL_match.php",
+            url: rootUrl + "/api/products_ALL_match.php",
             data: d,
             dataType: 'json',
             success: function (response) {
