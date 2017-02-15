@@ -1,7 +1,7 @@
 var selectedColor = '#c0392b';
 var inactiveColor = 'transparent';
 var cartTotal = 0;
-const rootUrl = "/buysporttv";
+const rootUrl = ".";
 
 $(document).ready(function () {
     // html setups for various pages
@@ -219,8 +219,10 @@ $(document).ready(function () {
             type: "POST",
             url: rootUrl + "/api/products_ALL_match.php",
             data: d,
-            dataType: 'json',
+            // dataType: 'json',
             success: function (response) {
+                console.log(response);
+                return;
                 if (response.length > 0) {
                     let sectionTitle = d.team;
                     $('#upcoming-games')
@@ -230,9 +232,11 @@ $(document).ready(function () {
                     $('#upcoming-games').html(createNoMatchesView('Inga matcher hittades'));
                 }
             },
-            error: function(response) {
+            error: function(response, status, text) {
                 console.log('Request failed');
-                console.log(response.responseText);
+                console.log(response);
+                console.log(status);
+                console.log(text);
             }
         });
     });
