@@ -26,24 +26,26 @@ function initializeMatches() {
  * init code for checkout page
  */
 function initializeCart() {
-    // $.ajax({
-    //     type: "GET",
-    //     url: "http://localhost/buysporttv/api/products_premier_league.php",
-    //     dataType: 'json',
-    //     success: function (response) {
-    //         $('#cart tbody').html(createCheckoutTableBodyHtml(response));
-    //         for (let product of response) {
-    //             cartTotal += parseInt(product.price);
-    //         }
-    //         console.log(cartTotal);
-    //         $('.cart-total').html('<strong>Total: ' + cartTotal + ':-</strong>');
-    //     }
-    // });
-
     let productList = JSON.parse(sessionStorage.getItem('selectedProducts'));
     $('#cart tbody').html(createCheckoutTableBodyHtml(productList));
     for (let product of productList) {
         cartTotal += parseInt(product.price);
     }
     $('.cart-total').html('<strong>Total: ' + cartTotal + ':-</strong>');
+}
+
+function initializeAdmin() {
+    $.ajax({
+        type: "POST",
+        url: rootUrl + "/api/products_premier_league.php",
+        dataType: "json",
+        success: function (response) {
+            if (response.length > 0) {
+                $('tbody').html(createAdminTableBodyHtml(response));
+            }
+        },
+        error: function (response) {
+            console.log(response.reponseText);
+        }
+    });
 }

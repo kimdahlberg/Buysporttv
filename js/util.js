@@ -231,11 +231,12 @@ function createAdminProductHtml(product) {
     +       '<td>' + product.startdate + '</td>'
     +       '<td>' + product.stopdate + '</td>'
     +       '<td>' + product.price +'</td>'
-    +       '<td class="btn-toolbar" data-id="'+product.id+'">'
+    +       '<td class="btn-toolbar" data-product=\'' + JSON.stringify(product) + '\'>'
     +           '<button type="" class="btn btn-danger glyphicon glyphicon-trash"></button>'
-    +           '<button type="" class="btn btn-warning glyphicon glyphicon-pencil"></button>'
+    +           '<button type="" data-toggle="modal" data-target="#updateModal" class="btn btn-warning glyphicon glyphicon-pencil"></button>'
     +       '</td>'
     +   '</tr>';
+    return html;
 }
 
 /**
@@ -243,7 +244,7 @@ function createAdminProductHtml(product) {
  */
 function createAdminTableBodyHtml(productList) {
     let html = '';
-    for (product of productList) {
+    for (let product of productList) {
         html += createAdminProductHtml(product);
     }
     return html;

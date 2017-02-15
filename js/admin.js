@@ -6,12 +6,29 @@ function getProductId(childElement) {
 }
 
 $(document).ready(function () {
+    initializeAdmin();
+
+    // Fill update modal with selected products current values
+    $('tbody').on('click', '.glyphicon-pencil', function(e){
+        let product = $(this).parent().data('product');
+        console.log(product);
+        $('#idUpdate').data('id', product.id);
+        $('#inputTypeUpdate').val(product.type);
+        $('#inputLeagueUpdate').val(product.league);
+        $('#inputHomeUpdate').val(product.home);
+        $('#inputAwayUpdate').val(product.away);
+        $('#inputStartDateUpdate').val(product.startdate);
+        $('#inputStopDateUpdate').val(product.stopdate);
+        $('#inputPriceUpdate').val(product.price);
+    })
 
     // Delete product from database
-    $('tbody').on('click', '.deleteProduct', function(e) {
+    $('tbody').on('click', '.glyphicon-trash', function(e) {
         e.preventDefault();
         let button = this;
-        let id = getProductId(button);
+        let product = $(button).parent().data('product');
+        console.log(button);
+        console.log(id);
         $.ajax({
             type: "POST",
             url: rootUrl + "/api/delete_product.php",
@@ -30,22 +47,22 @@ $(document).ready(function () {
     });
 
     // Add product to database
-    $('tbody').on('click', '.addProduct', function(e) {
+    $('#addModal').on('click', '.addButton', function(e) {
         e.preventDefault();
         let button = this;
         let newProduct = {
-            type: $('.inputType').val(),
-            league: $('.inputLeague').val(),
-            home: $('.inputHome').val(),
-            away: $('.inputAway').val(),
-            startdate: $('.inputStartDate').val(),
-            stopdate: $('.inputStopDate').val(),
-            price: $('.inputPrice').val()
+            type: $('#inputTypeAdd').val(),
+            league: $('#inputLeagueAdd').val(),
+            home: $('#inputHomeAdd').val(),
+            away: $('#inputAwayAdd').val(),
+            startdate: $('#inputStartDateAdd').val(),
+            stopdate: $('#inputStopDateAdd').val(),
+            price: $('#inputPriceAdd').val()
         };
         // let id = getProductId(button);
         $.ajax({
             type: "POST",
-            url: baseUrl + "add_product.php",
+            url: rootUrl + "/api/add_product.php",
             data: newProduct,
             dataType: "json",
             success: function (response) {
@@ -54,6 +71,8 @@ $(document).ready(function () {
                 // Otherwise return something like -1
                 if (response >= 0) {
                     alert('Product added to database!');
+                    // Reload products
+                    initializeAdmin();
                 }
                 else {
                     alert('Error: failed to add product to database');
@@ -66,32 +85,36 @@ $(document).ready(function () {
     });
 
     // Update database product
-    $('tbody').on('click', '.updateProduct', function(e) {
+    $('#updateModal').on('click', '.updateButton', function(e) {
         e.preventDefault();
         let button = this;
-        let id = getProductId(button);
-        let newProduct = {
-            id: id,
-            type: $('.inputType').val(),
-            league: $('.inputLeague').val(),
-            home: $('.inputHome').val(),
-            away: $('.inputAway').val(),
-            startdate: $('.inputStartDate').val(),
-            stopdate: $('.inputStopDate').val(),
-            price: $('.inputPrice').val()
+        let product = $(button).parent().data('product');
+        console.log(product);
+        let updateProduct = {
+            id: $('#idUpdate').data('id'),
+            type: $('#inputTypeUpdate').val(),
+            league: $('#inputLeagueUpdate').val(),
+            home: $('#inputHomeUpdate').val(),
+            away: $('#inputAwayUpdate').val(),
+            startdate: $('#inputStartDateUpdate').val(),
+            stopdate: $('#inputStopDateUpdate').val(),
+            price: $('#inputPriceUpdate').val()
         };
+        console.log(updateProduct);
 
         $.ajax({
             type: "POST",
-            url: baseUrl + "update_product.php",
-            data: newProduct,
+            url: rootUrl + "/api/update_product.php",
+            data: updateProduct,
             dataType: "json",
-            success: function (isAdded) {
-                if (isAdded === true) {
-                    alert('Product updated!')
+            success: function (isUpdated) {
+                if (isUpdated === true) {
+                    alert('Product updated!');
+                    // Reload products
+                    initializeAdmin();
                 }
                 else {
-                    alert('Error: ')
+                    alert('Error: failed to update product');
                 }
             },
             error: function(response) {
