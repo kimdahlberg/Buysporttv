@@ -7,6 +7,13 @@ function toggleActive(selectedElement) {
     };
     $(selectedElement).addClass('active');
 }
+/**
+ * Returns a html string of a loading gif
+ */
+function createLoadingHtml() {
+    let html = '<img src="/img/Loading_icon.gif"/>';
+    return html;
+}
 // TODO: remove active from leagues of other sports
 function removeActive(selectedElement) {
 
