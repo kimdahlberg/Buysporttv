@@ -1,4 +1,4 @@
-<?php header('Access-Control-Allow-Origin: http://buysporttv.zocomutbildning.se/*'); 
+<?php header('Access-Control-Allow-Origin: http://buysporttv.zocomutbildning.se'); 
 	include_once ("connect.php");
 	// header('Content-Type: application/json');
   	

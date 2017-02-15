@@ -1,4 +1,4 @@
-<?php header('Access-Control-Allow-Origin: http://buysporttv.zocomutbildning.se/*'); 
+<?php header('Access-Control-Allow-Origin: http://buysporttv.zocomutbildning.se'); 
 
  ini_set('display_errors', 'On');
     error_reporting(E_ALL);

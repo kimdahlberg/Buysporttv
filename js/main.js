@@ -227,8 +227,9 @@ $(document).ready(function () {
                     $('#upcoming-games').html(createNoMatchesView('Inga matcher hittades'));
                 }
             },
-            error: function() {
+            error: function(response) {
                 console.log('Request failed');
+                console.log(response.responseText);
             }
         });
     });
