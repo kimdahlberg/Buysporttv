@@ -3,11 +3,19 @@
 	// header('Content-Type: application/json');
   	$league = $_POST['league'];
   	// SQL Hämtar all football (premier league) med all data. 
-  	$STH = $pdo->prepare("SELECT `id`, `type`, `league`, `startdate`, `stopdate`, `home`,`away`, `price` FROM products WHERE `league` = :league ORDER BY `startdate` ASC");
+  	$STH = $pdo->prepare("SELECT id, type, league, startdate, stopdate, home, away, price 
+	  FROM products 
+	  WHERE league = :league");
       $STH->bindParam(":league", $league);
 $resultat = array();
 
-$STH->execute();
+try {
+	$STH->execute();
+}
+catch (PDOException $e) {
+	echo "Error: " . e->getMessage();
+}
+
 foreach( $STH as $row ) {
 
 	$resultat[] = $row;

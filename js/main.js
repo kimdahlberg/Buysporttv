@@ -123,18 +123,24 @@ $(document).ready(function () {
         toggleActive(this);
         let target = $(this).data('target');
         let league = $(this).data('league');
+        console.log(league);
+        console.log(target);
         sessionStorage.setItem('selectedLeague', league);
 
         $.ajax({
             type: "POST",
-            url: rootUrl + "/api/matcher.php",
+            url: rootUrl + "/api/products_league.php",
             data: league,
             dataType: "json",
             success: function (response) {
-                $(target).html(createProductViewHtml(response, league));
+                console.log(response);
+                $(target).html(createProductViewHtml(response, 'Kommande Matcher'));
             },
-            error: function() {
+            error: function(response, status, text) {
                 console.log('Request for upcoming games failed.');
+                console.log(response);
+                console.log(status);
+                console.log(text);
             }
         });
     });
@@ -158,7 +164,7 @@ $(document).ready(function () {
         // Send request to php
         $.ajax({
             type: "POST",
-            url: "/api/signup.php",
+            url: rootUrl + "/api/signup.php",
             data: d,
             dataType: "json",
             success: function (response) {
@@ -219,10 +225,8 @@ $(document).ready(function () {
             type: "POST",
             url: rootUrl + "/api/products_ALL_match.php",
             data: d,
-            // dataType: 'json',
+            dataType: 'json',
             success: function (response) {
-                console.log(response);
-                return;
                 if (response.length > 0) {
                     let sectionTitle = d.team;
                     $('#upcoming-games')
