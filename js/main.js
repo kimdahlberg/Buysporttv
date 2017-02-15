@@ -5,7 +5,7 @@ var cartTotal = 0;
 $(document).ready(function () {
     // html setups for various pages
     numOfProducts = JSON.parse(sessionStorage.getItem('selectedProducts'));
-    if (numOfProducts.length > 0) {
+    if (numOfProducts) {
         $('.glyphicon-shopping-cart').text(numOfProducts.length);
     }
     if (sessionStorage.getItem('userPrivileges') !== 'undefined') {
