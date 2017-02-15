@@ -28,17 +28,18 @@ $(document).ready(function () {
         let button = this;
         let product = $(button).parent().data('product');
         console.log(button);
-        console.log(id);
+        console.log(product.id);
         $.ajax({
             type: "POST",
-            url: rootUrl + "/api/delete_product.php",
-            data: id,
+            url: rootUrl + "/api/product_delete.php",
+            data: { id: product.id },
             dataType: "json",
             success: function (isRemoved) {
                 if (isRemoved === true) {
                     let elementToRemove = $(button).parents('tr');
                     $(elementToRemove).remove();
                 }
+                // initializeAdmin();
             },
             error: function (response) {
                 console.log(response.responseText);
