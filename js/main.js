@@ -200,6 +200,7 @@ $(document).ready(function () {
         let target = $(this).data('target');
         let league = $(this).data('league');
         sessionStorage.setItem('selectedLeague', league);
+        console.log(target);
 
         // // THE CORRECT REQUEST
         // $.ajax({
@@ -227,7 +228,6 @@ $(document).ready(function () {
             league: league,
             team: dummyTeam
         };
-        console.log(dummyTeam);
         $.ajax({
             type: "POST",
             url: rootUrl + "/api/products_ALL_match.php",
@@ -235,14 +235,16 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 if (response.length > 0) {
-                    let sectionTitle = d.team;
-                    $(target).html(createProductViewHtml(response, sectionTitle));
+                    $(target).html(createProductViewHtml(response, 'Kommande Matcher'));
+                    $(target).append('<a class="col-md-12" href="matcher.html"><h3>SE MERA</h3></a>');
                 }
                 else {
                     $(target).html(createNoMatchesView('Inga matcher hittades'));
+                    $(target).append('<a class="col-md-12" href="matcher.html"><h3>SE MERA</h3></a>');
                 }
             },
             error: function(response) {
+                console.log("Request failed.");
                 console.log(response.responseText);
             }
         });
