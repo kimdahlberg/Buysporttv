@@ -1,13 +1,14 @@
 <?php header('Access-Control-Allow-Origin: http://buysporttv.zocomutbildning.se'); 
-	include_once ("connect.php");
 	// header('Content-Type: application/json');
-  	$league = $_POST['league'];
-  	// SQL Hämtar all football (premier league) med all data. 
-  	$STH = $pdo->prepare("SELECT id, type, league, startdate, stopdate, home, away, price 
-	  FROM products 
-	  WHERE league = :league");
-      $STH->bindParam(":league", $league);
-$resultat = array();
+	include_once ("connect.php");
+	$league = $_POST['league'];
+	// SQL Hämtar all football från en liga med all data. 
+	$sql = "SELECT id, type, league, startdate, stopdate, home, away, price 
+			FROM products 
+			WHERE league = :league";
+	$STH = $pdo->prepare($sql);
+	$STH->bindParam(":league", $league);
+	$resultat = array();
 
 try {
 	$STH->execute();

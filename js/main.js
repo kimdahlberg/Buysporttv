@@ -9,7 +9,8 @@ $(document).ready(function () {
     if (numOfProducts) {
         $('.glyphicon-shopping-cart').text(numOfProducts.length);
     }
-    if (sessionStorage.getItem('userPrivileges') !== 'undefined') {
+    let checkPrivileges = sessionStorage.getItem('userPrivileges');
+    if (checkPrivileges !== undefined && checkPrivileges !== null) {
         // change functionality according to login status
         initializeLoggedInView();
     }
@@ -93,59 +94,6 @@ $(document).ready(function () {
     })
 
     // REQUESTS
-
-    // Delete product from database
-    $('tbody').on('click', '.deleteProduct', function(e) {
-        e.preventDefault();
-        // console.log(this);
-        let button = this;
-        let id = $(this).parent().data('id');
-        $.ajax({
-            type: "POST",
-            url: rootUrl + "/api/matcher.php",
-            data: id,
-            dataType: "json",
-            success: function (isRemoved) {
-                if (isRemoved === true) {
-                    let elementToRemove = $(button).parents('tr');
-                    $(elementToRemove).remove();
-                }
-            },
-            error: function (response) {
-                console.log(response.responseText);
-            }
-        });
-    });
-
-    // Request to get upcoming games of selected league
-    $('.league-toggle.index-view').click(function (e) {
-        e.preventDefault();
-        toggleActive(this);
-        let target = $(this).data('target');
-        let league = $(this).data('league');
-        console.log(league);
-        console.log(target);
-        sessionStorage.setItem('selectedLeague', league);
-
-        $.ajax({
-            type: "POST",
-            url: rootUrl + "/api/products_league.php",
-            data: league,
-            dataType: "json",
-            success: function (response) {
-                console.log(response);
-                $(target).html(createProductViewHtml(response, 'Kommande Matcher'));
-            },
-            error: function(response, status, text) {
-                console.log('Request for upcoming games failed.');
-                console.log(response);
-                console.log(status);
-                console.log(text);
-            }
-        });
-    });
-
-    
 
     // Registration request
     $('#regButton').click(function (e) { 
@@ -244,4 +192,59 @@ $(document).ready(function () {
             }
         });
     });
+
+    // Request to get upcoming games of selected league
+    $('.league-toggle.index-view').click(function (e) {
+        e.preventDefault();
+        toggleActive(this);
+        let target = $(this).data('target');
+        let league = $(this).data('league');
+        sessionStorage.setItem('selectedLeague', league);
+
+        // // THE CORRECT REQUEST
+        // $.ajax({
+        //     type: "POST",
+        //     url: rootUrl + "/api/products_league.php",
+        //     data: league,
+        //     dataType: "json",
+        //     success: function (response) {
+        //         console.log(response);
+        //         $(target).html(createProductViewHtml(response, 'Kommande Matcher'));
+        //     },
+        //     error: function(response, status, text) {
+        //         console.log('Request for upcoming games failed.');
+        //         console.log(response);
+        //         console.log(response.responseText);
+        //         console.log(status);
+        //         console.log(text);
+        //     }
+        // });
+
+        // INCORRECT REQUEST
+        $(target).html(createLoadingHtml);
+        let dummyTeam = LEAGUE_TEAMS[league][0];
+        let d = {
+            league: league,
+            team: dummyTeam
+        };
+        console.log(dummyTeam);
+        $.ajax({
+            type: "POST",
+            url: rootUrl + "/api/products_ALL_match.php",
+            data: d,
+            dataType: "json",
+            success: function (response) {
+                if (response.length > 0) {
+                    let sectionTitle = d.team;
+                    $(target).html(createProductViewHtml(response, sectionTitle));
+                }
+                else {
+                    $(target).html(createNoMatchesView('Inga matcher hittades'));
+                }
+            },
+            error: function(response) {
+                console.log(response.responseText);
+            }
+        });
+    });    
 });

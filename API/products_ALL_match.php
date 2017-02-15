@@ -1,7 +1,7 @@
 
 <?php header('Access-Control-Allow-Origin: http://buysporttv.zocomutbildning.se'); 
+	// header('Content-Type: application/json');
 	include_once ("connect.php");
-	header('Content-Type: application/json');
   	
 
 	$league = $_POST['league'];
@@ -27,6 +27,7 @@ foreach( $STH as $row ) {
 	$type 		= $row['type'];
 	$league 	= $row['league'];
 	$startdate 	= $row['startdate'];
+	$stopdate 	= $row['stopdate'];
 	$home 		= $row['home'];
 	$away 		= $row['away'];
 	$price 		= $row['price'];
