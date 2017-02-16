@@ -16,8 +16,12 @@ function initializeLoggedOutView() {
 function initializeMatches() {
     let dataSport = sessionStorage.getItem('selectedSport');
     let dataLeague = sessionStorage.getItem('selectedLeague');
+    // if (dataSport !== null &&  dataSport !== undefined) {
+    //     console.log(dataSport);
+    //     console.log(dataLeague);
+    //     $('#league-row').html(createLeagueSelectorHtml(getLeaguesSport(dataLeague)));
+    // }
     let leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
-    $('#league-row').html(createLeagueSelectorHtml(getLeagueSport(dataSport)));
     toggleActive(leagueButton);
     // Create carouselview in div that leagueButton targets
     $(leagueButton.data('target'))
