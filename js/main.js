@@ -1,5 +1,3 @@
-var selectedColor = '#c0392b';
-var inactiveColor = 'transparent';
 var cartTotal = 0;
 const rootUrl = ".";
 

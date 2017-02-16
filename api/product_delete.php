@@ -11,7 +11,7 @@ $sql = "DELETE FROM `products` WHERE `id` = :id";
         $statement = $pdo->prepare($sql);
         $statement->bindParam(":id", $id);
         $result = $statement->execute();
-        echo json_encode(1);
+        echo json_encode(true);
     }
     catch (PDOException $e) {
         echo "<br>" . $e->getMessage();

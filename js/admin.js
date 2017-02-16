@@ -1,9 +1,7 @@
 /**
  * script operations for admin functionality
  */
-function getProductId(childElement) {
-    return $(childElement).parent().data('id');
-}
+
 
 $(document).ready(function () {
     initializeAdmin();
@@ -60,7 +58,7 @@ $(document).ready(function () {
             stopdate: $('#inputStopDateAdd').val(),
             price: $('#inputPriceAdd').val()
         };
-        // let id = getProductId(button);
+
         $.ajax({
             type: "POST",
             url: rootUrl + "/api/add_product.php",
@@ -80,6 +78,7 @@ $(document).ready(function () {
                 }
             },
             error: function(response) {
+                alert('Error: couldn not add product to database: the request failed');
                 console.log(response.responseText);
             }
         });

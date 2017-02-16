@@ -1,5 +1,20 @@
 // Data used for testing html injection functions
 
+const SPORT_LEAGUES = {
+    'football': [
+        'serie a',
+        'premier league',
+        'la liga',
+        'champions league'
+    ],
+    'basket': [
+        'nba'
+    ],
+    'hockey': [
+        'nhl'
+    ]
+};
+
 const LEAGUE_TEAMS = {
 
     'serie a' : [
@@ -159,3 +174,5 @@ const LEAGUE_TEAMS = {
         'Winnipeg Jets'
     ],
 };
+
+

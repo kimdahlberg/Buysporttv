@@ -1,25 +1,4 @@
 /**
- * Add red bottom border to element
- */
-function toggleActive(selectedElement) {
-    if(!$(selectedElement).hasClass('active')){
-        $(selectedElement).siblings('.active').removeClass('active');
-    };
-    $(selectedElement).addClass('active');
-}
-/**
- * Returns a html string of a loading gif
- */
-function createLoadingHtml() {
-    let html = '<img src="/img/Loading_icon.gif"/>';
-    return html;
-}
-// TODO: remove active from leagues of other sports
-function removeActive(selectedElement) {
-
-} 
-
-/**
  *  Get the date from sql datetime
  */
 function parseDate(sqlDateTime) {
@@ -46,13 +25,50 @@ function isInArray(array, object) {
     }
     return false;
 }
-// TODO: make adding number to cart glyph a function
+
+/**
+ * Takes string leagueName and returns which sport
+ * league belongs to. Returns null if no match found.
+ */
+function getLeaguesSport(leagueName) {
+    for (sport in SPORT_LEAGUES) {
+        for (league of SPORT_LEAGUES[sport]) {
+            if (league === leagueName) {
+                return sport;
+            }
+        }
+    }
+    return null;
+}
+
+// DOM MANIPULATION
+
+/**
+ * Add red bottom border to element
+ */
+function toggleActive(selectedElement) {
+    if(!$(selectedElement).hasClass('active')){
+        $(selectedElement).siblings('.active').removeClass('active');
+    };
+    $(selectedElement).addClass('active');
+}
+
+
+// HTML STRING FUNCTIONS
+
 function updateCartCount() {
+// TODO: make adding number to cart glyph a function
     // sessionStorage.getItem('selectedProducts')
     // JSOn parse
     // check length
 }
-
+/**
+ * Returns a html string of a loading gif
+ */
+function createLoadingHtml() {
+    let html = '<img src="/img/Loading_icon.gif"/>';
+    return html;
+}
 /**
  * create login button in the navbar, replacing the logout button
  */
@@ -71,6 +87,21 @@ function createNavLogoutHtml() {
  */
 function createNoMatchesView(message) {
     return '<h3 class="faded-border">' + message + '</h3>';
+}
+
+/**
+ * Returns a html string of clickable league elements
+ */
+function createLeagueSelectorHtml(sport) {
+    let html = '';
+    // Iterate over every league name of selected sport
+    for (league of SPORT_LEAGUES[sport]) {
+        html +=
+            '<div class="col-md-3 col-sm-3 col-xs-3 league-toggle matcher-view" role="button" data-league="' + league + '" data-target="#carousel-col">'
+        +       '<h2>' + league.toUpperCase() + '</h2>'
+        +   '</div>';
+    }
+    return html;
 }
 
 /**

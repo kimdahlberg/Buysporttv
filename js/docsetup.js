@@ -11,9 +11,10 @@ function initializeLoggedOutView() {
 }
 
 /**
- * Init code for matches page. Creates a carousel with team names.
+ * Init code for matches page. creates league names, and a carousel with team names.
  */
 function initializeMatches() {
+    let dataSport = sessionStorage.getItem('selectedSport');
     let dataLeague = sessionStorage.getItem('selectedLeague');
     let leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
     toggleActive(leagueButton);
