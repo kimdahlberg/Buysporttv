@@ -9,7 +9,6 @@ $(document).ready(function () {
     // Fill update modal with selected products current values
     $('tbody').on('click', '.glyphicon-pencil', function(e){
         let product = $(this).parent().data('product');
-        console.log(product);
         $('#idUpdate').data('id', product.id);
         $('#inputTypeUpdate').val(product.type);
         $('#inputLeagueUpdate').val(product.league);
@@ -29,13 +28,17 @@ $(document).ready(function () {
         console.log(product.id);
         $.ajax({
             type: "POST",
-            url: rootUrl + "/api/product_delete.php",
+            url: rootUrl + "/api/admin.php",
             data: { id: product.id },
             dataType: "json",
-            success: function (isRemoved) {
-                if (isRemoved === true) {
+            success: function (deletedRows) {
+                // returns number of deleted rows
+                if (deletedRows === 1) {
                     let elementToRemove = $(button).parents('tr');
                     $(elementToRemove).remove();
+                }
+                else {
+                    console.log(deletedRows);
                 }
                 // initializeAdmin();
             },
