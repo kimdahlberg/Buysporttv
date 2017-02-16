@@ -17,6 +17,7 @@ function initializeMatches() {
     let dataSport = sessionStorage.getItem('selectedSport');
     let dataLeague = sessionStorage.getItem('selectedLeague');
     let leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
+    $('#league-row').html(createLeagueSelectorHtml(getLeagueSport(dataSport)));
     toggleActive(leagueButton);
     // Create carouselview in div that leagueButton targets
     $(leagueButton.data('target'))
