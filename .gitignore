@@ -8,8 +8,8 @@ node_modules/
 *.map
 *.lip
 
-config.php
-connect.php
+api/config.php
+api/connect.php
 
 domain
 todo
