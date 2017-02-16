@@ -14,18 +14,15 @@ function initializeLoggedOutView() {
  * Init code for matches page. creates league names, and a carousel with team names.
  */
 function initializeMatches() {
-    let dataSport = sessionStorage.getItem('selectedSport');
     let dataLeague = sessionStorage.getItem('selectedLeague');
-    // if (dataSport !== null &&  dataSport !== undefined) {
-    //     console.log(dataSport);
-    //     console.log(dataLeague);
-    //     $('#league-row').html(createLeagueSelectorHtml(getLeaguesSport(dataLeague)));
-    // }
+    if (dataLeague !== null &&  dataLeague !== undefined) {
+        var selectedSport = getLeaguesSport(dataLeague);
+        $('#league-row').html(createLeagueSelectorHtml(selectedSport));
+    }
     let leagueButton = $('.league-toggle[data-league="' + dataLeague + '"]');
     toggleActive(leagueButton);
     // Create carouselview in div that leagueButton targets
-    $(leagueButton.data('target'))
-        .html(createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]));
+    $(leagueButton.data('target')).html(createCarouselViewHtml(LEAGUE_TEAMS[dataLeague]));
 }
 
 /**

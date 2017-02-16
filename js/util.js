@@ -56,12 +56,6 @@ function toggleActive(selectedElement) {
 
 // HTML STRING FUNCTIONS
 
-function updateCartCount() {
-// TODO: make adding number to cart glyph a function
-    // sessionStorage.getItem('selectedProducts')
-    // JSOn parse
-    // check length
-}
 /**
  * Returns a html string of a loading gif
  */
@@ -101,6 +95,7 @@ function createLeagueSelectorHtml(sport) {
         +       '<h2>' + league.toUpperCase() + '</h2>'
         +   '</div>';
     }
+    console.log(html);
     return html;
 }
 
@@ -165,7 +160,7 @@ function createCarouselViewHtml(teamList) {
             count6++;
         };
     };
-    // Exiting loop, if count
+    // If loop ends when count is 0, ending divs are already in place
     if (count > 0) {
         carouselView += '</div></div>';
     }
